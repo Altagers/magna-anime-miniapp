@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react"
 import { useMiniKit } from "@coinbase/onchainkit/minikit"
 import { SentimentAnalyzer } from "@/components/sentiment-analyzer"
-import { Sparkles, Heart, Coffee, Star } from "lucide-react"
+import { Sparkles, Heart, Star } from "lucide-react"
 
 // Background decoration component
 const BgElement = ({
@@ -133,17 +133,6 @@ export default function Home() {
           <p className="text-xs text-gray-400">
             Inspired by anime classics like Naruto, Attack on Titan, Sword Art Online, Sailor Moon, One Punch Man, and
             Evangelion.
-          </p>
-          <p className="text-xs text-gray-400 flex items-center justify-center gap-1">
-            <Coffee className="w-3 h-3" /> Buy us a coffee:{" "}
-            <a
-              href="https://buymeacoffee.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-blue-400 hover:text-blue-300 transition-colors"
-            >
-              buymeacoffee.com/animeanalyzer
-            </a>
           </p>
           <p className="text-xs text-gray-500 mt-2">"People's dreams never end!" — One Piece</p>
         </div>
