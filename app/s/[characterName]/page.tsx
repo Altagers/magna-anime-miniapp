@@ -10,11 +10,11 @@ export async function generateMetadata({ params }: Props, parent: ResolvingMetad
   const characterNameParam = decodeURIComponent(params.characterName)
   const character = Object.values(characters).find((c) => c.name.toLowerCase() === characterNameParam.toLowerCase())
 
-  const appBaseUrl = process.env.NEXT_PUBLIC_URL || "https://v0-mini-open-ai.vercel.app"
-  const appName = process.env.NEXT_PUBLIC_ONCHAINKIT_PROJECT_NAME || "PowerPuff Analyzer"
+  const appBaseUrl = process.env.NEXT_PUBLIC_URL || "https://manga-anime-miniapp.vercel.app"
+  const appName = process.env.NEXT_PUBLIC_ONCHAINKIT_PROJECT_NAME || "Anime Character Analyzer"
 
   // Ensure icon and splash URLs are absolute and have defaults
-  const appIcon = process.env.NEXT_PUBLIC_APP_ICON || "/icon.png"
+  const appIcon = process.env.NEXT_PUBLIC_APP_ICON || "/logo.png"
   const appIconUrl = appIcon.startsWith("http")
     ? appIcon
     : `${appBaseUrl}${appIcon.startsWith("/") ? "" : "/"}${appIcon}`
@@ -24,8 +24,8 @@ export async function generateMetadata({ params }: Props, parent: ResolvingMetad
     ? appSplashImage
     : `${appBaseUrl}${appSplashImage.startsWith("/") ? "" : "/"}${appSplashImage}`
 
-  const appSplashBackgroundColor = process.env.NEXT_PUBLIC_SPLASH_BACKGROUND_COLOR || "#FFD1DC"
-  const defaultFcFrameImage = process.env.NEXT_PUBLIC_APP_HERO_IMAGE || `${appBaseUrl}/hero_powerpuff.png`
+  const appSplashBackgroundColor = process.env.NEXT_PUBLIC_SPLASH_BACKGROUND_COLOR || "#1a1a2e"
+  const defaultFcFrameImage = process.env.NEXT_PUBLIC_APP_HERO_IMAGE || `${appBaseUrl}/banner.png`
 
   // Define the frame structure based on your working example
   let frameDefinition: any
@@ -46,12 +46,12 @@ export async function generateMetadata({ params }: Props, parent: ResolvingMetad
       },
     }
     return {
-      title: "PowerPuff Analyzer Result",
-      description: "See which PowerPuff Girl you are!",
+      title: "Anime Character Analyzer Result",
+      description: "See which anime character you are!",
       openGraph: {
         // Fallback OG tags
-        title: "PowerPuff Analyzer",
-        description: "Which PowerPuff Girl are you? Find out!",
+        title: "Anime Character Analyzer",
+        description: "Which anime character are you? Find out!",
         images: [{ url: defaultFcFrameImage }],
       },
       other: {
@@ -61,10 +61,12 @@ export async function generateMetadata({ params }: Props, parent: ResolvingMetad
   }
 
   const characterImageMap: Record<string, string> = {
-    Bubbles: "/bubbles.png",
-    Blossom: "/blossom.png",
-    Buttercup: "/buttercup.png",
-    "Mojo Jojo": "/mojo.png",
+    Naruto: "/naruto.png",
+    "Eren Yeager": "/eren.png",
+    Asuna: "/asuna.png",
+    "Sailor Moon": "/sailor.png",
+    Saitama: "/saitama.png",
+    Shinji: "/shinji.png",
   }
   const characterImagePublicPath = characterImageMap[character.name] || "/placeholder.svg"
 
@@ -88,8 +90,8 @@ export async function generateMetadata({ params }: Props, parent: ResolvingMetad
   }
 
   return {
-    title: `I'm ${character.name}! - PowerPuff Analyzer Result`,
-    description: `I found out I'm ${character.name} using the PowerPuff Analyzer! ${character.description}`,
+    title: `I'm ${character.name}! - Anime Character Analyzer Result`,
+    description: `I found out I'm ${character.name} using the Anime Character Analyzer! ${character.description}`,
     // OpenGraph tags as fallback for other platforms
     openGraph: {
       title: `I'm ${character.name}! ${character.emoji}`,
@@ -107,13 +109,13 @@ export async function generateMetadata({ params }: Props, parent: ResolvingMetad
 export default function SharePage({ params }: Props) {
   const characterNameParam = decodeURIComponent(params.characterName)
   const character = Object.values(characters).find((c) => c.name.toLowerCase() === characterNameParam.toLowerCase())
-  const appBaseUrl = process.env.NEXT_PUBLIC_URL || "https://v0-mini-open-ai.vercel.app"
+  const appBaseUrl = process.env.NEXT_PUBLIC_URL || "https://manga-anime-miniapp.vercel.app"
 
   if (!character) {
     return (
-      <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-br from-pink-300 via-purple-300 to-indigo-400 p-8 text-center">
-        <h1 className="text-4xl font-heading text-ppg-title mb-6">Oops! Character Not Found</h1>
-        <p className="font-body text-xl text-black mb-8">We couldn't find that PowerPuff result.</p>
+      <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-br from-indigo-900 via-purple-900 to-indigo-800 p-8 text-center">
+        <h1 className="text-4xl font-heading text-white mb-6">Oops! Character Not Found</h1>
+        <p className="font-body text-xl text-gray-200 mb-8">We couldn't find that anime character result.</p>
         <a href={appBaseUrl}>
           <PpgButton variant="primary" className="text-xl">
             Take the Quiz!
@@ -124,35 +126,37 @@ export default function SharePage({ params }: Props) {
   }
 
   const characterImageMap: Record<string, string> = {
-    Bubbles: "/bubbles.png",
-    Blossom: "/blossom.png",
-    Buttercup: "/buttercup.png",
-    "Mojo Jojo": "/mojo.png",
+    Naruto: "/naruto.png",
+    "Eren Yeager": "/eren.png",
+    Asuna: "/asuna.png",
+    "Sailor Moon": "/sailor.png",
+    Saitama: "/saitama.png",
+    Shinji: "/shinji.png",
   }
   const characterImagePublicPath = characterImageMap[character.name] || "/placeholder.svg"
   const ogImageUrl = `${appBaseUrl}/api/generate-og-image?characterName=${encodeURIComponent(character.name)}&characterImage=${encodeURIComponent(characterImagePublicPath)}`
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-br from-pink-300 via-purple-300 to-indigo-400 p-8 text-center">
-      <div className="bg-white/80 backdrop-blur-md p-8 rounded-3xl shadow-2xl border-4 border-black max-w-lg w-full">
-        <h2 className="font-heading text-ppg-title text-3xl mb-2">This result was shared:</h2>
+    <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-br from-indigo-900 via-purple-900 to-indigo-800 p-8 text-center">
+      <div className="bg-white/10 backdrop-blur-md p-8 rounded-xl shadow-2xl border-3 border-gray-800 max-w-lg w-full">
+        <h2 className="font-heading text-white text-3xl mb-2">This result was shared:</h2>
         <img
           src={ogImageUrl || "/placeholder.svg"}
           alt={`${character.name} Result`}
           width={400}
           height={210}
-          className="rounded-lg shadow-xl border-2 border-black mx-auto mb-6"
+          className="rounded-lg shadow-xl border-2 border-gray-800 mx-auto mb-6"
         />
-        <p className="font-body text-xl text-black mb-8">
+        <p className="font-body text-xl text-gray-200 mb-8">
           It looks like someone shared their result: They're {character.name}! {character.emoji}
         </p>
         <a href={appBaseUrl}>
           <PpgButton variant="primary" className="text-xl">
-            Find YOUR Personality!
+            Find YOUR Character!
           </PpgButton>
         </a>
       </div>
-      <p className="font-body text-sm text-black mt-8">
+      <p className="font-body text-sm text-gray-400 mt-8">
         You were viewing a shared result. Click above to take the quiz yourself!
       </p>
     </div>

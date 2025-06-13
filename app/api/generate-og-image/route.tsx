@@ -8,10 +8,10 @@ export async function GET(req: NextRequest) {
   try {
     const { searchParams } = new URL(req.url)
     const characterName = searchParams.get("characterName")
-    const characterImagePublicPath = searchParams.get("characterImage") // e.g., /bubbles.png
+    const characterImagePublicPath = searchParams.get("characterImage") // e.g., /naruto.png
 
-    // Hardcode the base URL for reliability
-    const baseUrl = "https://v0-mini-open-ai.vercel.app"
+    // Update the base URL
+    const baseUrl = process.env.NEXT_PUBLIC_URL || "https://manga-anime-miniapp.vercel.app"
 
     if (!characterName || !characterImagePublicPath) {
       return new Response("Missing character information", { status: 400 })
@@ -25,16 +25,21 @@ export async function GET(req: NextRequest) {
       return new Response("Character not found", { status: 404 })
     }
 
+    // Define background colors for each character
     const bgColor =
-      characterData.name === "Bubbles"
-        ? "#73D2F3" // Bubbles Blue
-        : characterData.name === "Blossom"
-          ? "#F283B3" // Blossom Pink
-          : characterData.name === "Buttercup"
-            ? "#A2E5B3" // Buttercup Green
-            : characterData.name === "Mojo Jojo"
-              ? "#C084FC" // Mojo Purple
-              : "#F9A826" // Default Yellow/Orange
+      characterData.name === "Naruto"
+        ? "#FF9B21" // Naruto Orange
+        : characterData.name === "Eren Yeager"
+          ? "#4CAF50" // Eren Green
+          : characterData.name === "Asuna"
+            ? "#E91E63" // Asuna Pink/Red
+            : characterData.name === "Sailor Moon"
+              ? "#2196F3" // Sailor Moon Blue
+              : characterData.name === "Saitama"
+                ? "#FFC107" // Saitama Yellow
+                : characterData.name === "Shinji"
+                  ? "#9C27B0" // Shinji Purple
+                  : "#3F51B5" // Default Indigo
 
     return new ImageResponse(
       <div
@@ -47,15 +52,15 @@ export async function GET(req: NextRequest) {
           justifyContent: "center",
           backgroundColor: bgColor,
           padding: "40px",
-          border: "10px solid black",
-          borderRadius: "30px",
+          border: "8px solid #1a1a2e",
+          borderRadius: "20px",
         }}
       >
         <img
           src={characterImageUrl || "/placeholder.svg"}
           width={300}
           height={300}
-          style={{ borderRadius: "50%", border: "8px solid black", marginBottom: "30px" }}
+          style={{ borderRadius: "50%", border: "6px solid #1a1a2e", marginBottom: "30px" }}
           alt={characterName}
         />
         <h1
@@ -63,7 +68,7 @@ export async function GET(req: NextRequest) {
             fontSize: "82px",
             fontWeight: "bold",
             color: "white",
-            textShadow: "4px 4px 0 black, -4px -4px 0 black, 4px -4px 0 black, -4px 4px 0 black",
+            textShadow: "3px 3px 0 #1a1a2e, -3px -3px 0 #1a1a2e, 3px -3px 0 #1a1a2e, -3px 3px 0 #1a1a2e",
             margin: "0 0 20px 0",
             textAlign: "center",
             lineHeight: 1.1,
@@ -74,7 +79,7 @@ export async function GET(req: NextRequest) {
         <p
           style={{
             fontSize: "32px",
-            color: "black",
+            color: "#1a1a2e",
             textAlign: "center",
             maxWidth: "90%",
             lineHeight: 1.3,
