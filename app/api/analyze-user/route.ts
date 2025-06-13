@@ -44,17 +44,77 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ character: characters.naruto })
     }
 
-    // 2. Simple keyword-based analysis instead of using OpenAI
-    const allPosts = castTexts.join(" ").toLowerCase()
+    // Simple keyword-based analysis without OpenAI
+    const allPostsText = castTexts.join(" ").toLowerCase()
 
     // Define keywords for each character
     const characterKeywords = {
-      naruto: ["believe", "never give up", "friend", "dream", "goal", "ninja", "ramen", "hokage", "!"],
-      eren: ["freedom", "fight", "enemy", "forward", "determination", "attack", "titan", "war"],
-      asuna: ["protect", "together", "strategy", "support", "team", "sword", "online", "virtual"],
-      sailor: ["love", "friendship", "justice", "believe in yourself", "together", "moon", "heart", "❤️", "✨"],
-      saitama: ["ok", "sure", "whatever", "simple", "bored", "strong", "punch", "hero"],
-      shinji: ["why", "meaning", "purpose", "connection", "fear", "uncertainty", "eva", "father", "?"],
+      naruto: [
+        "believe",
+        "never give up",
+        "friend",
+        "dream",
+        "goal",
+        "ninja",
+        "hokage",
+        "ramen",
+        "dattebayo",
+        "team",
+        "protect",
+      ],
+      eren: [
+        "freedom",
+        "fight",
+        "enemy",
+        "forward",
+        "determination",
+        "attack",
+        "titan",
+        "wall",
+        "destroy",
+        "revenge",
+        "war",
+      ],
+      asuna: [
+        "protect",
+        "together",
+        "strategy",
+        "support",
+        "team",
+        "sword",
+        "online",
+        "virtual",
+        "skill",
+        "lightning",
+        "flash",
+      ],
+      "sailor moon": [
+        "love",
+        "friendship",
+        "justice",
+        "moon",
+        "heart",
+        "crystal",
+        "princess",
+        "transform",
+        "evil",
+        "magic",
+        "guardian",
+      ],
+      saitama: ["ok", "sure", "whatever", "bored", "sale", "simple", "strong", "hero", "punch", "training", "monster"],
+      shinji: [
+        "why",
+        "meaning",
+        "purpose",
+        "connection",
+        "fear",
+        "uncertainty",
+        "eva",
+        "father",
+        "pilot",
+        "sorry",
+        "depression",
+      ],
     }
 
     // Count keyword matches for each character
@@ -62,28 +122,29 @@ export async function POST(request: NextRequest) {
       const score = keywords.reduce((total, keyword) => {
         // Count occurrences of each keyword
         const regex = new RegExp(keyword, "gi")
-        const matches = allPosts.match(regex)
+        const matches = allPostsText.match(regex)
         return total + (matches ? matches.length : 0)
       }, 0)
 
       return { character, score }
     })
 
-    // Find character with highest score
+    // Sort by score and get the highest
     scores.sort((a, b) => b.score - a.score)
-    const topCharacter = scores[0].character
+    const bestMatch = scores[0].character
 
-    // If all scores are 0, return random character
-    if (scores[0].score === 0) {
-      const characterNames = Object.keys(characters)
-      const randomCharacter = characterNames[Math.floor(Math.random() * characterNames.length)]
-      console.log(`Backend: No clear match for FID ${fid}. Randomly selected ${randomCharacter}.`)
-      return NextResponse.json({ character: characters[randomCharacter] })
+    console.log(`Backend: Matched character for FID ${fid} using keyword analysis: ${bestMatch}`)
+
+    // Map the character name to our character data
+    const matchedCharacter = characters[bestMatch]
+
+    if (!matchedCharacter) {
+      console.error(`Backend: Could not find character data for ${bestMatch}. Defaulting to Naruto.`)
+      return NextResponse.json({ character: characters.naruto })
     }
 
-    console.log(`Backend: Matched character for FID ${fid}: ${topCharacter} with score ${scores[0].score}`)
     return NextResponse.json({
-      character: characters[topCharacter],
+      character: matchedCharacter,
     })
   } catch (error) {
     console.error("Backend: Error in analyze-user route:", error)
