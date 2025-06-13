@@ -67,7 +67,27 @@ export default function Home() {
       </div>
 
       <footer className="relative z-10 mt-12 text-center">
-        <p className="font-body text-sm text-gray-400">Made with anime magic and code!</p>
+        <p className="font-body text-sm text-gray-400">
+          Made with anime magic and code! by{" "}
+          <a
+            href="https://farcaster.xyz/altagers.eth"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-purple-400 hover:text-purple-300 transition-colors"
+          >
+            @altagers.eth
+          </a>{" "}
+          with{" "}
+          <a
+            href="https://farcaster.xyz/sohey"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-purple-400 hover:text-purple-300 transition-colors"
+          >
+            @sohey
+          </a>{" "}
+          support
+        </p>
       </footer>
     </div>
   )
