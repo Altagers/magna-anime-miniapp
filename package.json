@@ -53,6 +53,7 @@
     "lucide-react": "^0.454.0",
     "next": "15.2.4",
     "next-themes": "latest",
+    "pino-pretty": "^10.3.1",
     "react": "^19",
     "react-day-picker": "8.10.1",
     "react-dom": "^19",
