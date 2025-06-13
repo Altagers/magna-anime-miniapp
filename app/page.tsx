@@ -4,6 +4,7 @@ import { useEffect, useState } from "react"
 import { useMiniKit } from "@coinbase/onchainkit/minikit"
 import { SentimentAnalyzer } from "@/components/sentiment-analyzer"
 import { Sparkles, Heart, Star } from "lucide-react"
+import { AnimeQuote } from "@/components/anime-quote"
 
 // Background decoration component
 const BgElement = ({
@@ -134,7 +135,9 @@ export default function Home() {
             Inspired by anime classics like Naruto, Attack on Titan, Sword Art Online, Sailor Moon, One Punch Man, and
             Evangelion.
           </p>
-          <p className="text-xs text-gray-500 mt-2">"People's dreams never end!" — One Piece</p>
+
+          {/* Рандомная аниме-цитата */}
+          <AnimeQuote />
         </div>
       </footer>
 
