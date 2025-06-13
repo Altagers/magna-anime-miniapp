@@ -131,10 +131,6 @@ export default function Home() {
             </a>{" "}
             support
           </p>
-          <p className="text-xs text-gray-400">
-            Inspired by anime classics like Naruto, Attack on Titan, Sword Art Online, Sailor Moon, One Punch Man, and
-            Evangelion.
-          </p>
 
           {/* Рандомная аниме-цитата */}
           <AnimeQuote />
