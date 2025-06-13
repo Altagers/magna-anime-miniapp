@@ -17,10 +17,10 @@
     "screenshotUrls": ["https://manga-anime-miniapp.vercel.app/screenshot.png"],
     "primaryCategory": "entertainment",
     "tags": ["anime", "personality", "farcaster", "analyzer"],
-    "heroImageUrl": "https://manga-anime-miniapp.vercel.app/banner.png",
+    "heroImageUrl": "https://manga-anime-miniapp.vercel.app/logo.png",
     "tagline": "Find your anime character match!",
     "ogTitle": "Anime Character Analyzer",
     "ogDescription": "Which Anime Character Are You? Analyze your Farcaster posts to find out!",
-    "ogImageUrl": "https://manga-anime-miniapp.vercel.app/banner.png"
+    "ogImageUrl": "https://manga-anime-miniapp.vercel.app/logo.png"
   }
 }

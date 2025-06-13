@@ -10,14 +10,14 @@ export const metadata: Metadata = {
   other: {
     "fc:frame": JSON.stringify({
       version: "next",
-      imageUrl: "https://manga-anime-miniapp.vercel.app/banner.png",
+      imageUrl: "https://manga-anime-miniapp.vercel.app/logo.png",
       button: {
         title: "Find your Anime Character",
         action: {
           type: "launch_frame",
           name: "Anime Character Analyzer",
           url: "https://manga-anime-miniapp.vercel.app",
-          splashImageUrl: "https://manga-anime-miniapp.vercel.app/banner.png",
+          splashImageUrl: "https://manga-anime-miniapp.vercel.app/splash.png",
           splashBackgroundColor: "#1a1a2e",
         },
       },

@@ -26,13 +26,13 @@ export async function GET() {
       screenshotUrls: [process.env.NEXT_PUBLIC_APP_SCREENSHOT || `${URL}/screenshot.png`],
       primaryCategory: process.env.NEXT_PUBLIC_APP_PRIMARY_CATEGORY || "entertainment",
       tags: ["anime", "personality", "farcaster", "analyzer"],
-      heroImageUrl: process.env.NEXT_PUBLIC_APP_HERO_IMAGE || `${URL}/banner.png`,
+      heroImageUrl: process.env.NEXT_PUBLIC_APP_HERO_IMAGE || `${URL}/logo.png`,
       tagline: process.env.NEXT_PUBLIC_APP_TAGLINE || "Find your anime character match!",
       ogTitle: process.env.NEXT_PUBLIC_APP_OG_TITLE || "Anime Character Analyzer",
       ogDescription:
         process.env.NEXT_PUBLIC_APP_OG_DESCRIPTION ||
         "Which Anime Character Are You? Analyze your Farcaster posts to find out!",
-      ogImageUrl: process.env.NEXT_PUBLIC_APP_OG_IMAGE || `${URL}/banner.png`,
+      ogImageUrl: process.env.NEXT_PUBLIC_APP_OG_IMAGE || `${URL}/logo.png`,
     },
   })
 }
