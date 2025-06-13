@@ -49,6 +49,16 @@ export function ShareResultButton({ character, onReset }: ShareResultButtonProps
       "Get in the robot! I'm Shinji! 🤖 Discover your anime alter ego!",
       "Complicated feelings... I'm Shinji! 🤖 Find out which anime character you are!",
     ],
+    Goku: [
+      "I want to get stronger! I'm Goku! 🥋 Which Anime Character are you?",
+      "Let's fight and have fun! I'm Goku! 🥋 Discover your anime alter ego!",
+      "Kamehameha! I'm Goku! 🥋 Find out which anime character you are!",
+    ],
+    "Edward Elric": [
+      "Equivalent exchange! I'm Edward Elric! ⚗️ Which Anime Character are you?",
+      "Alchemy is science! I'm Edward Elric! ⚗️ Discover your anime alter ego!",
+      "Don't call me short! I'm Edward Elric! ⚗️ Find out which anime character you are!",
+    ],
   }
 
   const handleShare = async () => {
@@ -88,6 +98,8 @@ export function ShareResultButton({ character, onReset }: ShareResultButtonProps
     "Sailor Moon": "primary", // Blue-ish
     Saitama: "bubbles", // Yellow-ish
     Shinji: "mojo", // Purple-ish
+    Goku: "primary", // Orange-ish
+    "Edward Elric": "buttercup", // Gold-ish
   }
   const buttonVariant = characterColors[character.name] || "primary"
 

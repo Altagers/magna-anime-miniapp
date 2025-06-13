@@ -63,4 +63,22 @@ export const characters: Record<string, AnimeCharacter> = {
       "You're introspective, sensitive, and deeply thoughtful. Your posts reveal your complex inner world and emotional depth. Now please get in the robot and stop overthinking!",
     joke: "You've definitely said 'I mustn't run away' before facing your inbox on Monday morning.",
   },
+  goku: {
+    name: "Goku",
+    emoji: "🥋",
+    color: "orange",
+    trait: "Pure-hearted & Adventurous",
+    description:
+      "You're pure-hearted, always seeking new challenges, and love to push your limits! Your posts show your enthusiasm for growth and helping others. Just like Goku, you probably get excited about the smallest things!",
+    joke: "You've definitely forgotten important events because you were too busy training or thinking about food.",
+  },
+  edward: {
+    name: "Edward Elric",
+    emoji: "⚗️",
+    color: "gold",
+    trait: "Intelligent & Determined",
+    description:
+      "You're brilliant, stubborn, and refuse to give up on what you believe in! Your posts show your analytical mind and strong moral compass. Just like Edward, you probably get really passionate about your interests!",
+    joke: "You've probably gotten into heated debates about the laws of equivalent exchange in everyday situations.",
+  },
 }

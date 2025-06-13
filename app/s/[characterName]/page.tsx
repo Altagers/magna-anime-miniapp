@@ -67,6 +67,8 @@ export async function generateMetadata({ params }: Props, parent: ResolvingMetad
     "Sailor Moon": "/sailor.png",
     Saitama: "/saitama.png",
     Shinji: "/shinji.png",
+    Goku: "/goku.png",
+    "Edward Elric": "/edward.png",
   }
   const characterImagePublicPath = characterImageMap[character.name] || "/placeholder.svg"
 
@@ -132,6 +134,8 @@ export default function SharePage({ params }: Props) {
     "Sailor Moon": "/sailor.png",
     Saitama: "/saitama.png",
     Shinji: "/shinji.png",
+    Goku: "/goku.png",
+    "Edward Elric": "/edward.png",
   }
   const characterImagePublicPath = characterImageMap[character.name] || "/placeholder.svg"
   const ogImageUrl = `${appBaseUrl}/api/generate-og-image?characterName=${encodeURIComponent(character.name)}&characterImage=${encodeURIComponent(characterImagePublicPath)}`

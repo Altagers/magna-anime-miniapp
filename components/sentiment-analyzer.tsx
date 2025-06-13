@@ -110,6 +110,8 @@ function ResultScreen({ result, onReset }: { result: AnalysisResult; onReset: ()
     "Sailor Moon": "bubbles", // Blue
     Saitama: "primary", // Yellow
     Shinji: "mojo", // Purple
+    Goku: "primary", // Orange
+    "Edward Elric": "buttercup", // Gold/Yellow
   }
 
   const characterImageMap: Record<string, string> = {
@@ -119,6 +121,8 @@ function ResultScreen({ result, onReset }: { result: AnalysisResult; onReset: ()
     "Sailor Moon": "/sailor.png",
     Saitama: "/saitama.png",
     Shinji: "/shinji.png",
+    Goku: "/goku.png",
+    "Edward Elric": "/edward.png",
   }
 
   const characterName = result.character.name
