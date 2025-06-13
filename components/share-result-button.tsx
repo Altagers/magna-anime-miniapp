@@ -14,17 +14,18 @@ export function ShareResultButton({ character, onReset }: ShareResultButtonProps
   const [status, setStatus] = useState<"idle" | "loading" | "error">("idle")
   const [errorMessage, setErrorMessage] = useState<string | null>(null)
 
-  const appBaseUrl = "https://v0-mini-open-ai.vercel.app" // Hardcoded for reliability
+  // Update to use the correct domain
+  const appBaseUrl = process.env.NEXT_PUBLIC_URL || "https://manga-anime-miniapp.vercel.app"
 
   const handleShare = async () => {
     setStatus("loading")
     setErrorMessage(null)
 
     // Construct the URL for the shareable HTML page
-    // Example: https://v0-mini-open-ai.vercel.app/s/Bubbles
     const sharePageUrl = new URL(`/s/${encodeURIComponent(character.name)}`, appBaseUrl).toString()
 
-    const castText = `I'm ${character.name}! ${character.emoji} Which PowerPuff Girl are you? Find out on PowerPuff Analyzer!`
+    // Update the cast text to match anime theme
+    const castText = `I'm ${character.name}! ${character.emoji} Which Anime Character are you? Find out on Anime Character Analyzer!`
 
     try {
       await sdk.actions.composeCast({
@@ -39,13 +40,16 @@ export function ShareResultButton({ character, onReset }: ShareResultButtonProps
     }
   }
 
-  const characterPpgColors: Record<string, "primary" | "bubbles" | "blossom" | "buttercup" | "mojo"> = {
-    Bubbles: "bubbles",
-    Blossom: "blossom",
-    Buttercup: "buttercup",
-    "Mojo Jojo": "mojo",
+  // Map anime characters to appropriate colors
+  const characterColors: Record<string, "primary" | "bubbles" | "blossom" | "buttercup" | "mojo"> = {
+    Naruto: "bubbles", // Orange-ish
+    "Eren Yeager": "buttercup", // Green-ish
+    Asuna: "blossom", // Pink/Red-ish
+    "Sailor Moon": "primary", // Blue-ish
+    Saitama: "bubbles", // Yellow-ish
+    Shinji: "mojo", // Purple-ish
   }
-  const buttonVariant = characterPpgColors[character.name] || "primary"
+  const buttonVariant = characterColors[character.name] || "primary"
 
   return (
     <div className="w-full flex flex-col items-center gap-4">
