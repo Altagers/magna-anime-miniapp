@@ -39,108 +39,156 @@ export async function POST(request: NextRequest) {
     const castTexts = neynarData.casts?.map((cast: any) => cast.text).filter(Boolean) || []
 
     if (castTexts.length === 0) {
-      console.log(`Backend: No casts found for FID ${fid}. Defaulting to Naruto.`)
-      // If no casts, default to Naruto
-      return NextResponse.json({ character: characters.naruto })
+      console.log(`Backend: No casts found for FID ${fid}. Using randomized result.`)
+      // If no casts, return a random character instead of defaulting to Naruto
+      const characterKeys = Object.keys(characters)
+      const randomCharacter = characterKeys[Math.floor(Math.random() * characterKeys.length)]
+      return NextResponse.json({ character: characters[randomCharacter] })
     }
 
     // Simple keyword-based analysis without OpenAI
     const allPostsText = castTexts.join(" ").toLowerCase()
 
-    // Define keywords for each character
+    // Define keywords for each character with weights
     const characterKeywords = {
       naruto: [
-        "believe",
-        "never give up",
-        "friend",
-        "dream",
-        "goal",
-        "ninja",
-        "hokage",
-        "ramen",
-        "dattebayo",
-        "team",
-        "protect",
+        { word: "believe", weight: 1.5 },
+        { word: "never give up", weight: 2 },
+        { word: "friend", weight: 1 },
+        { word: "dream", weight: 1.5 },
+        { word: "goal", weight: 1 },
+        { word: "ninja", weight: 2 },
+        { word: "hokage", weight: 3 },
+        { word: "ramen", weight: 2 },
+        { word: "dattebayo", weight: 3 },
+        { word: "team", weight: 1 },
+        { word: "protect", weight: 1 },
+        { word: "shadow clone", weight: 2.5 },
+        { word: "jutsu", weight: 2 },
+        { word: "sensei", weight: 1.5 },
       ],
       eren: [
-        "freedom",
-        "fight",
-        "enemy",
-        "forward",
-        "determination",
-        "attack",
-        "titan",
-        "wall",
-        "destroy",
-        "revenge",
-        "war",
+        { word: "freedom", weight: 2 },
+        { word: "fight", weight: 1 },
+        { word: "enemy", weight: 1 },
+        { word: "forward", weight: 1.5 },
+        { word: "determination", weight: 1.5 },
+        { word: "attack", weight: 1 },
+        { word: "titan", weight: 2.5 },
+        { word: "wall", weight: 1.5 },
+        { word: "destroy", weight: 1.5 },
+        { word: "revenge", weight: 2 },
+        { word: "war", weight: 1 },
+        { word: "tatakae", weight: 3 },
+        { word: "rumbling", weight: 2.5 },
+        { word: "yeager", weight: 2 },
       ],
       asuna: [
-        "protect",
-        "together",
-        "strategy",
-        "support",
-        "team",
-        "sword",
-        "online",
-        "virtual",
-        "skill",
-        "lightning",
-        "flash",
+        { word: "protect", weight: 1 },
+        { word: "together", weight: 1.5 },
+        { word: "strategy", weight: 1.5 },
+        { word: "support", weight: 1 },
+        { word: "team", weight: 1 },
+        { word: "sword", weight: 2 },
+        { word: "online", weight: 1.5 },
+        { word: "virtual", weight: 1.5 },
+        { word: "skill", weight: 1 },
+        { word: "lightning", weight: 2 },
+        { word: "flash", weight: 2 },
+        { word: "game", weight: 1.5 },
+        { word: "aincrad", weight: 2.5 },
+        { word: "kirito", weight: 2 },
       ],
       "sailor moon": [
-        "love",
-        "friendship",
-        "justice",
-        "moon",
-        "heart",
-        "crystal",
-        "princess",
-        "transform",
-        "evil",
-        "magic",
-        "guardian",
+        { word: "love", weight: 1.5 },
+        { word: "friendship", weight: 1.5 },
+        { word: "justice", weight: 2 },
+        { word: "moon", weight: 2 },
+        { word: "heart", weight: 1 },
+        { word: "crystal", weight: 1.5 },
+        { word: "princess", weight: 1.5 },
+        { word: "transform", weight: 1.5 },
+        { word: "evil", weight: 1 },
+        { word: "magic", weight: 1 },
+        { word: "guardian", weight: 1.5 },
+        { word: "sailor", weight: 2.5 },
+        { word: "usagi", weight: 2 },
+        { word: "tuxedo", weight: 2 },
       ],
-      saitama: ["ok", "sure", "whatever", "bored", "sale", "simple", "strong", "hero", "punch", "training", "monster"],
+      saitama: [
+        { word: "ok", weight: 0.5 }, // Снижен вес для общих слов
+        { word: "sure", weight: 0.5 }, // Снижен вес для общих слов
+        { word: "whatever", weight: 0.7 }, // Снижен вес для общих слов
+        { word: "bored", weight: 1.5 },
+        { word: "sale", weight: 1 },
+        { word: "simple", weight: 0.7 }, // Снижен вес для общих слов
+        { word: "strong", weight: 1 },
+        { word: "hero", weight: 1 },
+        { word: "punch", weight: 2 },
+        { word: "training", weight: 1.5 },
+        { word: "monster", weight: 1.5 },
+        { word: "one punch", weight: 3 },
+        { word: "caped baldy", weight: 3 },
+        { word: "genos", weight: 2 },
+      ],
       shinji: [
-        "why",
-        "meaning",
-        "purpose",
-        "connection",
-        "fear",
-        "uncertainty",
-        "eva",
-        "father",
-        "pilot",
-        "sorry",
-        "depression",
+        { word: "why", weight: 0.7 }, // Снижен вес для общих слов
+        { word: "meaning", weight: 1 },
+        { word: "purpose", weight: 1 },
+        { word: "connection", weight: 1 },
+        { word: "fear", weight: 1.5 },
+        { word: "uncertainty", weight: 1.5 },
+        { word: "eva", weight: 2.5 },
+        { word: "father", weight: 1 },
+        { word: "pilot", weight: 2 },
+        { word: "sorry", weight: 0.7 }, // Снижен вес для общих слов
+        { word: "depression", weight: 2 },
+        { word: "angel", weight: 2 },
+        { word: "instrumentality", weight: 3 },
+        { word: "ayanami", weight: 2 },
       ],
     }
 
-    // Count keyword matches for each character
+    // Count keyword matches for each character with weights
     const scores = Object.entries(characterKeywords).map(([character, keywords]) => {
-      const score = keywords.reduce((total, keyword) => {
+      const score = keywords.reduce((total, { word, weight }) => {
         // Count occurrences of each keyword
-        const regex = new RegExp(keyword, "gi")
+        const regex = new RegExp(`\\b${word}\\b`, "gi") // Используем границы слов для более точного совпадения
         const matches = allPostsText.match(regex)
-        return total + (matches ? matches.length : 0)
+        return total + (matches ? matches.length * weight : 0)
       }, 0)
 
-      return { character, score }
+      // Add a small random factor for variety (0-15% of the score)
+      const randomFactor = score * (Math.random() * 0.15)
+      const finalScore = score + randomFactor
+
+      return { character, score: finalScore }
     })
 
     // Sort by score and get the highest
     scores.sort((a, b) => b.score - a.score)
+
+    // If scores are very close (within 10%), randomly choose between top 2
+    if (scores.length > 1 && scores[0].score > 0 && (scores[0].score - scores[1].score) / scores[0].score < 0.1) {
+      const topCharacter = Math.random() < 0.5 ? scores[0].character : scores[1].character
+      console.log(`Backend: Scores were close, randomly selected between top 2: ${topCharacter}`)
+      const matchedCharacter = characters[topCharacter]
+      return NextResponse.json({ character: matchedCharacter })
+    }
+
     const bestMatch = scores[0].character
 
     console.log(`Backend: Matched character for FID ${fid} using keyword analysis: ${bestMatch}`)
+    console.log(`Backend: Scores:`, scores.map((s) => `${s.character}: ${s.score.toFixed(2)}`).join(", "))
 
     // Map the character name to our character data
     const matchedCharacter = characters[bestMatch]
 
     if (!matchedCharacter) {
-      console.error(`Backend: Could not find character data for ${bestMatch}. Defaulting to Naruto.`)
-      return NextResponse.json({ character: characters.naruto })
+      console.error(`Backend: Could not find character data for ${bestMatch}. Using randomized result.`)
+      const characterKeys = Object.keys(characters)
+      const randomCharacter = characterKeys[Math.floor(Math.random() * characterKeys.length)]
+      return NextResponse.json({ character: characters[randomCharacter] })
     }
 
     return NextResponse.json({

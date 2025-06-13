@@ -101,6 +101,10 @@ export default function Home() {
           <h1 className="anime-text text-4xl text-white leading-tight">Anime Analyzer</h1>
           <p className="text-lg text-gray-100 font-medium">Discover your anime alter ego!</p>
         </div>
+        {/* Добавляем "Powered by Minikit" в основное окно */}
+        <div className="bg-black/30 px-3 py-1 rounded-lg text-xs text-white/80 backdrop-blur-sm">
+          Powered by Minikit
+        </div>
       </header>
 
       {/* Main sentiment analyzer component */}
@@ -129,7 +133,7 @@ export default function Home() {
             >
               @sohey
             </a>{" "}
-            support
+            support. Powered by Minikit
           </p>
 
           {/* Рандомная аниме-цитата */}

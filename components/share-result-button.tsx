@@ -65,7 +65,7 @@ export function ShareResultButton({ character, onReset }: ShareResultButtonProps
 
     // Add the joke to the cast text
     const randomMessage = messages[Math.floor(Math.random() * messages.length)]
-    const castText = `${randomMessage} ${character.joke} Made by @altagers.eth with @sohey support.`
+    const castText = `${randomMessage} ${character.joke} Made by @altagers.eth with @sohey support. Powered by Minikit.`
 
     try {
       await sdk.actions.composeCast({
