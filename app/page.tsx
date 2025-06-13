@@ -1,9 +1,9 @@
 "use client"
 
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import { useMiniKit } from "@coinbase/onchainkit/minikit"
 import { SentimentAnalyzer } from "@/components/sentiment-analyzer"
-import { Sparkles } from "lucide-react"
+import { Sparkles, Heart, Coffee, Star } from "lucide-react"
 
 // Background decoration component
 const BgElement = ({
@@ -27,6 +27,47 @@ const BgElement = ({
       className={`absolute ${size} rounded-full bg-white/20 animate-pulse`}
       style={{ top, left, animationDelay: delay }}
     ></div>
+  )
+}
+
+// Easter egg component
+const EasterEgg = () => {
+  const [clicked, setClicked] = useState(0)
+  const [showMessage, setShowMessage] = useState("")
+
+  const handleClick = () => {
+    const newCount = clicked + 1
+    setClicked(newCount)
+
+    if (newCount === 3) {
+      setShowMessage("Is that a JoJo reference?")
+    } else if (newCount === 5) {
+      setShowMessage("Omae wa mou shindeiru!")
+    } else if (newCount === 7) {
+      setShowMessage("NANI?!")
+    } else if (newCount === 10) {
+      setShowMessage("This isn't even my final form!")
+    } else {
+      setShowMessage("")
+    }
+
+    // Reset after a while
+    if (showMessage) {
+      setTimeout(() => setShowMessage(""), 3000)
+    }
+  }
+
+  return (
+    <div className="absolute bottom-2 right-2 z-20">
+      <div onClick={handleClick} className="cursor-pointer opacity-30 hover:opacity-100 transition-opacity">
+        <Star className="w-5 h-5 text-yellow-300" />
+      </div>
+      {showMessage && (
+        <div className="absolute bottom-6 right-0 bg-black/80 text-white px-3 py-1 rounded-lg text-sm whitespace-nowrap">
+          {showMessage}
+        </div>
+      )}
+    </div>
   )
 }
 
@@ -66,29 +107,50 @@ export default function Home() {
         <SentimentAnalyzer />
       </div>
 
-      <footer className="relative z-10 mt-12 text-center">
-        <p className="text-sm text-gray-400">
-          Made with anime magic and code! by{" "}
-          <a
-            href="https://farcaster.xyz/altagers.eth"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-purple-400 hover:text-purple-300 transition-colors"
-          >
-            @altagers.eth
-          </a>{" "}
-          with{" "}
-          <a
-            href="https://farcaster.xyz/sohey"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-purple-400 hover:text-purple-300 transition-colors"
-          >
-            @sohey
-          </a>{" "}
-          support
-        </p>
+      <footer className="relative z-10 mt-12 text-center bg-gray-800/50 backdrop-blur-sm p-4 rounded-xl w-full max-w-xl border border-gray-700">
+        <div className="flex flex-col gap-3">
+          <p className="text-sm text-gray-300">
+            Made with <Heart className="inline w-4 h-4 text-red-400" /> by{" "}
+            <a
+              href="https://farcaster.xyz/altagers.eth"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-purple-400 hover:text-purple-300 transition-colors"
+            >
+              @altagers.eth
+            </a>{" "}
+            with{" "}
+            <a
+              href="https://farcaster.xyz/sohey"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-purple-400 hover:text-purple-300 transition-colors"
+            >
+              @sohey
+            </a>{" "}
+            support
+          </p>
+          <p className="text-xs text-gray-400">
+            Inspired by anime classics like Naruto, Attack on Titan, Sword Art Online, Sailor Moon, One Punch Man, and
+            Evangelion.
+          </p>
+          <p className="text-xs text-gray-400 flex items-center justify-center gap-1">
+            <Coffee className="w-3 h-3" /> Buy us a coffee:{" "}
+            <a
+              href="https://buymeacoffee.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-blue-400 hover:text-blue-300 transition-colors"
+            >
+              buymeacoffee.com/animeanalyzer
+            </a>
+          </p>
+          <p className="text-xs text-gray-500 mt-2">"People's dreams never end!" — One Piece</p>
+        </div>
       </footer>
+
+      {/* Easter egg */}
+      <EasterEgg />
     </div>
   )
 }

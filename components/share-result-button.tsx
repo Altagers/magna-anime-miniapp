@@ -3,10 +3,10 @@
 import { useState } from "react"
 import { sdk } from "@farcaster/frame-sdk"
 import { PpgButton } from "./ppg-button"
-import type { PowerPuffCharacter } from "@/lib/characters"
+import type { AnimeCharacter } from "@/lib/characters"
 
 interface ShareResultButtonProps {
-  character: PowerPuffCharacter
+  character: AnimeCharacter
   onReset: () => void
 }
 
@@ -62,7 +62,10 @@ export function ShareResultButton({ character, onReset }: ShareResultButtonProps
     const messages = characterMessages[character.name] || [
       `I'm ${character.name}! ${character.emoji} Which Anime Character are you?`,
     ]
-    const castText = `${messages[Math.floor(Math.random() * messages.length)]} Made by @altagers.eth with @sohey support.`
+
+    // Add the joke to the cast text
+    const randomMessage = messages[Math.floor(Math.random() * messages.length)]
+    const castText = `${randomMessage} ${character.joke} Made by @altagers.eth with @sohey support.`
 
     try {
       await sdk.actions.composeCast({
