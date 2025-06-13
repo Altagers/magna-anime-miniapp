@@ -26,7 +26,7 @@ export async function POST(request: NextRequest) {
 
     console.log(`Backend: Querying Neynar API for FID: ${fid}`) // Log before Neynar call
 
-    const neynarResponse = await fetch(`https://api.neynar.com/v2/farcaster/feed/user/popular?fid=${fid}&limit=10`, {
+    const neynarResponse = await fetch(`https://api.neynar.com/v2/farcaster/feed/user/casts?fid=${fid}&limit=10`, {
       method: "GET",
       headers: {
         accept: "application/json",
