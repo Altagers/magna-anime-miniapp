@@ -17,6 +17,40 @@ export function ShareResultButton({ character, onReset }: ShareResultButtonProps
   // Update to use the correct domain
   const appBaseUrl = process.env.NEXT_PUBLIC_URL || "https://manga-anime-miniapp.vercel.app"
 
+  // Fun messages for each character
+  const characterMessages: Record<string, string[]> = {
+    Naruto: [
+      "Believe it! I'm Naruto! 🍥 Which Anime Character are you?",
+      "My ninja way led me to be Naruto! 🍥 Discover your anime alter ego!",
+      "Dattebayo! I'm Naruto! 🍥 Find out which anime character you are!",
+    ],
+    "Eren Yeager": [
+      "I'll destroy them all! I'm Eren Yeager! ⚔️ Which Anime Character are you?",
+      "Freedom awaits! I'm Eren Yeager! ⚔️ Discover your anime alter ego!",
+      "Tatakae! I'm Eren Yeager! ⚔️ Find out which anime character you are!",
+    ],
+    Asuna: [
+      "Lightning Flash! I'm Asuna! ⚔️ Which Anime Character are you?",
+      "From the virtual world, I'm Asuna! ⚔️ Discover your anime alter ego!",
+      "With my rapier in hand, I'm Asuna! ⚔️ Find out which anime character you are!",
+    ],
+    "Sailor Moon": [
+      "In the name of the Moon! I'm Sailor Moon! 🌙 Which Anime Character are you?",
+      "Moon Prism Power! I'm Sailor Moon! 🌙 Discover your anime alter ego!",
+      "Fighting evil by moonlight! I'm Sailor Moon! 🌙 Find out which anime character you are!",
+    ],
+    Saitama: [
+      "One Punch is all I need! I'm Saitama! 👊 Which Anime Character are you?",
+      "Just a hero for fun! I'm Saitama! 👊 Discover your anime alter ego!",
+      "OK. I'm Saitama! 👊 Find out which anime character you are!",
+    ],
+    Shinji: [
+      "I mustn't run away! I'm Shinji! 🤖 Which Anime Character are you?",
+      "Get in the robot! I'm Shinji! 🤖 Discover your anime alter ego!",
+      "Complicated feelings... I'm Shinji! 🤖 Find out which anime character you are!",
+    ],
+  }
+
   const handleShare = async () => {
     setStatus("loading")
     setErrorMessage(null)
@@ -24,8 +58,11 @@ export function ShareResultButton({ character, onReset }: ShareResultButtonProps
     // Construct the URL for the shareable HTML page
     const sharePageUrl = new URL(`/s/${encodeURIComponent(character.name)}`, appBaseUrl).toString()
 
-    // Update the cast text to match anime theme
-    const castText = `I'm ${character.name}! ${character.emoji} Which Anime Character are you? Find out on Anime Character Analyzer!`
+    // Get random message for the character or use default
+    const messages = characterMessages[character.name] || [
+      `I'm ${character.name}! ${character.emoji} Which Anime Character are you?`,
+    ]
+    const castText = `${messages[Math.floor(Math.random() * messages.length)]} Made by @altagers.eth with @sohey support.`
 
     try {
       await sdk.actions.composeCast({
