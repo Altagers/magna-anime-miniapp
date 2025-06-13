@@ -2,6 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Import anime-styled font */
+@import url("https://fonts.googleapis.com/css2?family=Bangers&family=Bungee&family=Luckiest+Guy&display=swap");
+
 /* Define custom fonts using @font-face */
 @font-face {
   font-family: "Quicksand-VariableFont_wght";
@@ -23,6 +26,7 @@
   --background-end-rgb: 255, 255, 255;
   --blue-primary: 37, 99, 235;
   --blue-secondary: 59, 130, 246;
+  --anime-font: "Luckiest Guy", cursive;
 }
 
 @layer base {
@@ -125,5 +129,12 @@ h3 {
     paint-order: stroke fill; /* Ensures stroke is behind fill */
     text-shadow: -2px -2px 0 white, 2px -2px 0 white, -2px 2px 0 white, -2px 3px 0 white, -2px 0 0 white, 2px 0 0 white,
       0 -2px 0 white, 0 2px 0 white;
+  }
+
+  /* Anime-styled text */
+  .anime-text {
+    font-family: var(--anime-font);
+    letter-spacing: 0.05em;
+    text-shadow: 3px 3px 0 rgba(0, 0, 0, 0.2);
   }
 }

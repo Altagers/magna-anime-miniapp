@@ -55,14 +55,20 @@ export default function Home() {
 
       {/* Header */}
       <header className="relative z-10 w-full max-w-xl mb-8 flex flex-col sm:flex-row justify-between items-center gap-4 p-4 bg-gradient-to-r from-indigo-500 to-purple-600 border-[3px] border-gray-800 rounded-xl shadow-[5px_5px_0px_0px_rgba(0,0,0,0.7)]">
-        <div className="text-center sm:text-left">
-          <h1 className="font-heading text-4xl text-white leading-tight">Anime Analyzer</h1>
+        <div className="text-center sm:text-left w-full">
+          <h1 className="anime-text text-4xl text-white leading-tight">Anime Analyzer</h1>
           <p className="font-body text-lg text-gray-100 font-medium">Discover your anime alter ego!</p>
         </div>
       </header>
 
       {/* Main sentiment analyzer component */}
-      <div className="relative z-10">
+      <div className="relative z-10 w-full max-w-xl">
+        <div className="text-center mb-8">
+          <h2 className="anime-text text-5xl text-white mb-2">Which</h2>
+          <h2 className="anime-text text-5xl text-white mb-2">Anime</h2>
+          <h2 className="anime-text text-5xl text-white mb-2">Character</h2>
+          <h2 className="anime-text text-5xl text-white">Are You?</h2>
+        </div>
         <SentimentAnalyzer />
       </div>
 
