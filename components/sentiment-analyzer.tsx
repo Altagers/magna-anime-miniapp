@@ -11,7 +11,7 @@ const AnimeHeaderImage = () => (
   <div className="flex justify-center">
     <div>
       <Image
-        src="/banner.png"
+        src="/logo.png"
         alt="Anime Character Analyzer"
         width={280}
         height={140}
