@@ -44,9 +44,9 @@ export async function POST(request: NextRequest) {
     const castTexts = neynarData.casts?.map((cast: any) => cast.text).filter(Boolean) || []
 
     if (castTexts.length === 0) {
-      console.log(`Backend: No casts found for FID ${fid}. Defaulting to Bubbles.`)
-      // If no casts, default to Bubbles (or handle as preferred)
-      return NextResponse.json({ character: characters.bubbles })
+      console.log(`Backend: No casts found for FID ${fid}. Defaulting to Naruto.`)
+      // If no casts, default to Naruto (or handle as preferred)
+      return NextResponse.json({ character: characters.naruto })
     }
 
     // 2. Prepare the prompt and call OpenAI API
@@ -54,39 +54,53 @@ export async function POST(request: NextRequest) {
     console.log(`Backend: Sending ${castTexts.length} cast(s) to OpenAI for FID ${fid}.`)
 
     const { text: characterName } = await generateText({
-      model: openai("gpt-4o-mini"),
-      system: `You are a personality analyzer for PowerPuff Girls characters. Analyze the user's posts and determine which character they match best. Be specific and look for distinct patterns:
+      model: openai("gpt-3.5-turbo"), // Changed from gpt-4o-mini to gpt-3.5-turbo
+      system: `You are a personality analyzer for anime characters. Analyze the user's posts and determine which character they match best. Be specific and look for distinct patterns:
 
-BUBBLES - The Joy Spreader:
-- Uses lots of positive language, emojis, exclamation points
-- Shares wholesome content, compliments others frequently
-- Posts about cute things, animals, friendship, love
-- Optimistic even about challenges, sees good in everything
-- Language: "amazing!", "so cute!", "love this!", "wholesome", "sweet"
+NARUTO - The Determined Optimist:
+- Uses enthusiastic language, believes in never giving up
+- Shares motivational content, talks about friendship and bonds
+- Posts about goals, dreams, and overcoming obstacles
+- Optimistic even about challenges, believes in people's potential
+- Language: "believe it!", "never give up!", "my ninja way", "friends"
 
-BLOSSOM - The Strategic Leader:
-- Shares informative content, explains complex topics
+EREN YEAGER - The Freedom Fighter:
+- Direct, intense communication style
+- Talks about freedom, fighting against oppression
+- Posts about determination, moving forward no matter what
+- Uses strong language, doesn't back down from conflict
+- Language: "fight", "freedom", "enemies", "moving forward", "determination"
+
+ASUNA - The Strategic Protector:
+- Shares thoughtful, supportive content
 - Takes charge in conversations, offers solutions
-- Posts about planning, organization, learning, teaching
-- Uses structured thinking, bullet points, step-by-step approaches
-- Language: "strategy", "plan", "analyze", "solution", "research", "data"
+- Posts about protecting loved ones, strategy, and efficiency
+- Balances strength with compassion
+- Language: "protect", "together", "strategy", "support", "team"
 
-BUTTERCUP - The Rebel Fighter:
-- Direct, blunt communication style
-- Challenges popular opinions, calls out problems
-- Posts about injustice, fighting for causes, being authentic
-- Uses strong language, doesn't sugarcoat things
-- Language: "fight", "real talk", "honestly", "enough", "stand up", sarcasm
+SAILOR MOON - The Compassionate Leader:
+- Uses positive, uplifting language with emojis
+- Shares content about love, friendship, and justice
+- Posts about standing up for what's right, helping others
+- Emotional and expressive communication style
+- Language: "love", "friendship", "justice", "believe in yourself", "together"
 
-MOJO JOJO - The Mastermind:
-- Complex, elaborate posts with sophisticated vocabulary
-- Shares grand theories, ambitious projects, intellectual pursuits
-- Posts about power, influence, complex schemes or ideas
-- Verbose, dramatic language, talks about "plans" and "domination"
-- Language: "brilliant", "scheme", "dominate", "superior", "elaborate", "mastermind"
+SAITAMA - The Understated Powerhouse:
+- Casual, often deadpan communication style
+- Shares simple, straightforward observations
+- Posts about everyday life, occasional philosophical insights
+- Unbothered by drama, focuses on essentials
+- Language: "ok", "sure", "whatever", minimalist responses, practical advice
+
+SHINJI - The Introspective Thinker:
+- Reflective, sometimes self-doubting communication
+- Shares philosophical questions and internal struggles
+- Posts about meaning, purpose, and human connection
+- Thoughtful and nuanced perspective
+- Language: "why", "meaning", "purpose", "connection", "fear", "uncertainty"
 
 Respond with ONLY the character name that best matches the overall pattern. Consider the dominant themes, not just individual posts.`,
-      prompt: `Analyze these social media posts and determine which PowerPuff Girls character this person is most like:\n\n${allPosts}`,
+      prompt: `Analyze these social media posts and determine which anime character this person is most like:\n\n${allPosts}`,
       maxTokens: 15,
       temperature: 0.4, // Increased from 0.2 for more variety
     })
@@ -99,10 +113,10 @@ Respond with ONLY the character name that best matches the overall pattern. Cons
 
     if (!matchedCharacter) {
       console.error(
-        `Backend: OpenAI returned an unknown character for FID ${fid}: '${characterName}'. Defaulting to Bubbles.`,
+        `Backend: OpenAI returned an unknown character for FID ${fid}: '${characterName}'. Defaulting to Naruto.`,
       )
       // Fallback if OpenAI returns an unexpected value
-      return NextResponse.json({ character: characters.bubbles }) // Default to Bubbles
+      return NextResponse.json({ character: characters.naruto }) // Default to Naruto
     }
 
     console.log(`Backend: Matched character for FID ${fid}: ${matchedCharacter.name}`)
