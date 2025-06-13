@@ -72,9 +72,8 @@ export function SentimentAnalyzer() {
 
   return (
     <div className="w-full max-w-md mx-auto">
-      <AnimeHeaderImage />
-      <div className="relative bg-gradient-to-r from-indigo-500 to-purple-600 border-[3px] border-gray-800 rounded-[20px] p-6 pt-8 text-center shadow-[5px_5px_0px_0px_rgba(0,0,0,0.7)]">
-        <h1 className="font-heading text-5xl md:text-6xl leading-none text-white mb-8 relative">
+      <div className="relative bg-gradient-to-r from-indigo-500 to-purple-600 border-[3px] border-gray-800 rounded-[20px] p-6 pt-8 text-center shadow-[5px_5px_0px_0px_rgba(0,0,0,0.7)] mb-8">
+        <h1 className="anime-text anime-text-outline text-5xl md:text-6xl leading-tight mb-8">
           Which
           <br />
           Anime
@@ -87,7 +86,7 @@ export function SentimentAnalyzer() {
           onClick={handleAnalyze}
           disabled={loading || !context?.user?.fid}
           variant="primary"
-          className="w-full text-xl"
+          className="w-full"
           sparkles
         >
           {loading ? "Analyzing..." : !context?.user?.fid ? "Connect Wallet to Analyze" : "Analyze My Posts!"}
@@ -95,7 +94,7 @@ export function SentimentAnalyzer() {
       </div>
       {error && (
         <div className="mt-6 p-4 bg-red-400 border-3 border-gray-800 rounded-xl text-center shadow-[4px_4px_0px_0px_rgba(0,0,0,0.7)]">
-          <p className="text-white font-heading text-2xl">{error}</p>
+          <p className="text-white font-bold text-2xl">{error}</p>
         </div>
       )}
     </div>
@@ -127,7 +126,7 @@ function ResultScreen({ result, onReset }: { result: AnalysisResult; onReset: ()
   return (
     <div className="w-full max-w-md mx-auto p-4 md:p-6 flex flex-col items-center">
       <PpgButton variant={buttonVariant} className="mb-8 w-full md:w-auto text-3xl" disabled sparkles>
-        You're {characterName}!
+        <span className="anime-text-outline">You're {characterName}!</span>
       </PpgButton>
       <div className="mb-8 bg-white p-3 border-[3px] border-gray-800 rounded-full shadow-[5px_5px_0px_0px_rgba(0,0,0,0.7)]">
         <Image
@@ -139,7 +138,7 @@ function ResultScreen({ result, onReset }: { result: AnalysisResult; onReset: ()
         />
       </div>
       <div className="relative bg-white border-[3px] border-gray-800 rounded-2xl p-6 w-full mb-10 text-center shadow-[5px_5px_0px_0px_rgba(0,0,0,0.7)]">
-        <p className="text-xl font-body font-semibold text-gray-800">{result.character.description}</p>
+        <p className="text-xl font-semibold text-gray-800">{result.character.description}</p>
         <div className="absolute left-1/2 -bottom-[15px] transform -translate-x-1/2 w-0 h-0 border-l-[15px] border-l-transparent border-r-[15px] border-r-transparent border-t-[15px] border-t-gray-800" />
         <div className="absolute left-1/2 -bottom-[12px] transform -translate-x-1/2 w-0 h-0 border-l-[12px] border-l-transparent border-r-[12px] border-r-transparent border-t-[12px] border-t-white" />
       </div>

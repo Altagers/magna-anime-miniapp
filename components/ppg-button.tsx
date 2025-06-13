@@ -17,7 +17,7 @@ export function PpgButton({
   ...props
 }: PpgButtonProps) {
   const baseClasses = `
-    font-heading text-2xl uppercase tracking-wider
+    font-bold text-xl uppercase tracking-wider
     px-8 py-3 rounded-xl border-2 border-gray-800
     shadow-[3px_3px_0px_0px_rgba(0,0,0,0.7)]
     transition-all duration-150 ease-in-out
