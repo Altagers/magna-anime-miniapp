@@ -69,6 +69,13 @@ export async function generateMetadata({ params }: Props, parent: ResolvingMetad
     Shinji: "/shinji.png",
     Goku: "/goku.png",
     "Edward Elric": "/edward.png",
+    Tanjiro: "/tanjiro.png",
+    "Itachi Uchiha": "/itachi.png",
+    "Natsu Dragneel": "/natsu.png",
+    "Monkey D. Luffy": "/luffy.png",
+    "Yujiro Hanma": "/hanma.png",
+    Griffith: "/griffith.png",
+    Alucard: "/alucard.png",
   }
   const characterImagePublicPath = characterImageMap[character.name] || "/placeholder.svg"
 
@@ -136,6 +143,13 @@ export default function SharePage({ params }: Props) {
     Shinji: "/shinji.png",
     Goku: "/goku.png",
     "Edward Elric": "/edward.png",
+    Tanjiro: "/tanjiro.png",
+    "Itachi Uchiha": "/itachi.png",
+    "Natsu Dragneel": "/natsu.png",
+    "Monkey D. Luffy": "/luffy.png",
+    "Yujiro Hanma": "/hanma.png",
+    Griffith: "/griffith.png",
+    Alucard: "/alucard.png",
   }
   const characterImagePublicPath = characterImageMap[character.name] || "/placeholder.svg"
   const ogImageUrl = `${appBaseUrl}/api/generate-og-image?characterName=${encodeURIComponent(character.name)}&characterImage=${encodeURIComponent(characterImagePublicPath)}`

@@ -39,7 +39,25 @@ export async function GET(req: NextRequest) {
                 ? "#FFC107" // Saitama Yellow
                 : characterData.name === "Shinji"
                   ? "#9C27B0" // Shinji Purple
-                  : "#3F51B5" // Default Indigo
+                  : characterData.name === "Goku"
+                    ? "#FF5722" // Goku Orange/Red
+                    : characterData.name === "Edward Elric"
+                      ? "#FFD700" // Edward Gold
+                      : characterData.name === "Tanjiro"
+                        ? "#00BCD4" // Tanjiro Teal
+                        : characterData.name === "Itachi Uchiha"
+                          ? "#DC143C" // Itachi Crimson
+                          : characterData.name === "Natsu Dragneel"
+                            ? "#FF69B4" // Natsu Pink
+                            : characterData.name === "Monkey D. Luffy"
+                              ? "#FF4444" // Luffy Red
+                              : characterData.name === "Yujiro Hanma"
+                                ? "#8B4513" // Hanma Brown
+                                : characterData.name === "Griffith"
+                                  ? "#F5F5DC" // Griffith Beige/White
+                                  : characterData.name === "Alucard"
+                                    ? "#8B0000" // Alucard Dark Red
+                                    : "#3F51B5" // Default Indigo
 
     return new ImageResponse(
       <div
