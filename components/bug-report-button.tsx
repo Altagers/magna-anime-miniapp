@@ -35,7 +35,7 @@ const bugMessages = [
 
       // Create reply to specific post
       await sdk.actions.composeCast({
-        text: `${randomMessage}\n\n@altagers.eth help me duck! 🆘 https://farcaster.xyz/miniapps/CNI1bJGQDb5O/anime-character-analyzer`,
+        text: `${randomMessage}\n\n@altagers.eth help me mr.duck! 🆘`,
         // Reply to specific cast hash
         parentCastHash: "0x9f5f9dc0",
       })
