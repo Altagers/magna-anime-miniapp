@@ -121,7 +121,6 @@ function ResultScreen({ result, onReset }: { result: AnalysisResult; onReset: ()
     Alucard: "blossom", // Crimson/Red
   }
 
-  // ПОЛНЫЙ маппинг всех персонажей с правильными именами файлов
   const characterImageMap: Record<string, string> = {
     Naruto: "/naruto.png",
     "Eren Yeager": "/eren.png",

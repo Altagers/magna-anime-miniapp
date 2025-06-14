@@ -60,7 +60,6 @@ export async function generateMetadata({ params }: Props, parent: ResolvingMetad
     }
   }
 
-  // ПОЛНЫЙ маппинг всех персонажей с правильными именами файлов
   const characterImageMap: Record<string, string> = {
     Naruto: "/naruto.png",
     "Eren Yeager": "/eren.png",
@@ -135,7 +134,6 @@ export default function SharePage({ params }: Props) {
     )
   }
 
-  // ПОЛНЫЙ маппинг всех персонажей с правильными именами файлов
   const characterImageMap: Record<string, string> = {
     Naruto: "/naruto.png",
     "Eren Yeager": "/eren.png",

@@ -17,7 +17,7 @@ export function ShareResultButton({ character, onReset }: ShareResultButtonProps
   // Update to use the correct domain
   const appBaseUrl = process.env.NEXT_PUBLIC_URL || "https://manga-anime-miniapp.vercel.app"
 
-  // Fun messages for each character - ОБНОВЛЕНО для всех персонажей включая новых
+  // Fun messages for each character
   const characterMessages: Record<string, string[]> = {
     Naruto: [
       "Believe it! I'm Naruto! 🍥 Which Anime Character are you?",

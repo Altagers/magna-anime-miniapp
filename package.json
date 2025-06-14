@@ -68,9 +68,6 @@
     "wagmi": "latest",
     "zod": "^3.24.1"
   },
-  "opRetro": {
-    "projectId": "0x60bd8803fd4feb1bad1339489ffacc2d3bc54409c30ea398d0e2af56bc78fb84"
-  },
   "devDependencies": {
     "@types/node": "^22",
     "@types/react": "^19",
