@@ -6,6 +6,7 @@ import type { AnimeCharacter } from "@/lib/characters"
 import Image from "next/image"
 import { PpgButton } from "./ppg-button"
 import { ShareResultButton } from "./share-result-button"
+import { BugReportButton } from "./bug-report-button"
 
 const AnimeHeaderImage = () => (
   <div className="flex justify-center">
@@ -95,7 +96,11 @@ export function SentimentAnalyzer() {
       </div>
       {error && (
         <div className="mt-6 p-4 bg-red-400 border-3 border-gray-800 rounded-xl text-center shadow-[4px_4px_0px_0px_rgba(0,0,0,0.7)]">
-          <p className="text-white font-bold text-2xl">{error}</p>
+          <p className="text-white font-bold text-2xl mb-4">{error}</p>
+          {/* Bug Report Button in error state */}
+          <div className="flex justify-center">
+            <BugReportButton />
+          </div>
         </div>
       )}
     </div>
@@ -119,7 +124,7 @@ function ResultScreen({ result, onReset }: { result: AnalysisResult; onReset: ()
     Alucard: "blossom", // Crimson/Red
   }
 
-  // Маппинг персонажей с правильными именами файлов (УБРАНЫ НАТСУ И ЛУФФИ)
+  // Character mapping with correct file names (NATSU AND LUFFY REMOVED)
   const characterImageMap: Record<string, string> = {
     Naruto: "/naruto.png",
     "Eren Yeager": "/eren.png",
@@ -132,7 +137,7 @@ function ResultScreen({ result, onReset }: { result: AnalysisResult; onReset: ()
     Tanjiro: "/tanjiro.png",
     "Itachi Uchiha": "/itachi.png",
     "Yujiro Hanma": "/hanma.png",
-    Griffith: "/grifith.png", // Используем существующее имя файла
+    Griffith: "/grifith.png", // Using existing file name
     Alucard: "/alucard.png",
   }
 

@@ -5,6 +5,7 @@ import { useMiniKit } from "@coinbase/onchainkit/minikit"
 import { SentimentAnalyzer } from "@/components/sentiment-analyzer"
 import { Sparkles, Heart, Star } from "lucide-react"
 import { AnimeQuote } from "@/components/anime-quote"
+import { BugReportButton } from "@/components/bug-report-button"
 
 // Background decoration component
 const BgElement = ({
@@ -101,7 +102,7 @@ export default function Home() {
           <h1 className="anime-text text-4xl text-white leading-tight">Anime Analyzer</h1>
           <p className="text-lg text-gray-100 font-medium">Discover your anime alter ego!</p>
         </div>
-        {/* Добавляем "Powered by Minikit" в основное окно */}
+        {/* Add "Powered by Minikit" to main window */}
         <div className="bg-black/30 px-3 py-1 rounded-lg text-xs text-white/80 backdrop-blur-sm">
           Powered by Minikit
         </div>
@@ -136,8 +137,13 @@ export default function Home() {
             support. Powered by Minikit
           </p>
 
-          {/* Рандомная аниме-цитата */}
+          {/* Random anime quote */}
           <AnimeQuote />
+
+          {/* Bug Report Button */}
+          <div className="flex justify-center mt-3">
+            <BugReportButton />
+          </div>
         </div>
       </footer>
 
