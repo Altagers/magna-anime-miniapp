@@ -25,7 +25,7 @@ export async function GET() {
         "Which Anime Character Are You? Analyze your Farcaster posts to find out!",
       screenshotUrls: [process.env.NEXT_PUBLIC_APP_SCREENSHOT || `${URL}/screenshot.png`],
       primaryCategory: process.env.NEXT_PUBLIC_APP_PRIMARY_CATEGORY || "entertainment",
-      tags: ["anime", "personality", "farcaster", "analyzer", "op-retro", "public-goods"],
+      tags: ["anime", "personality", "farcaster", "analyzer"],
       heroImageUrl: process.env.NEXT_PUBLIC_APP_HERO_IMAGE || `${URL}/logo.png`,
       tagline: process.env.NEXT_PUBLIC_APP_TAGLINE || "Find your anime character match!",
       ogTitle: process.env.NEXT_PUBLIC_APP_OG_TITLE || "Anime Character Analyzer",
@@ -33,10 +33,6 @@ export async function GET() {
         process.env.NEXT_PUBLIC_APP_OG_DESCRIPTION ||
         "Which Anime Character Are You? Analyze your Farcaster posts to find out!",
       ogImageUrl: process.env.NEXT_PUBLIC_APP_OG_IMAGE || `${URL}/logo.png`,
-      funding: {
-        type: "op-retro",
-        projectId: "0x60bd8803fd4feb1bad1339489ffacc2d3bc54409c30ea398d0e2af56bc78fb84"
-      },
     },
   })
 }

@@ -8,8 +8,9 @@ export async function GET(req: NextRequest) {
   try {
     const { searchParams } = new URL(req.url)
     const characterName = searchParams.get("characterName")
-    const characterImagePublicPath = searchParams.get("characterImage")
+    const characterImagePublicPath = searchParams.get("characterImage") // e.g., /naruto.png
 
+    // Update the base URL
     const baseUrl = process.env.NEXT_PUBLIC_URL || "https://manga-anime-miniapp.vercel.app"
 
     if (!characterName || !characterImagePublicPath) {
@@ -24,55 +25,21 @@ export async function GET(req: NextRequest) {
       return new Response("Character not found", { status: 404 })
     }
 
-    // Более точные цвета для каждого персонажа
-    const getBackgroundColor = (name: string): string => {
-      switch (name) {
-        case "Naruto":
-          return "#FF9B21" // Naruto Orange
-        case "Eren Yeager":
-          return "#4CAF50" // Eren Green
-        case "Asuna":
-          return "#E91E63" // Asuna Pink/Red
-        case "Sailor Moon":
-          return "#2196F3" // Sailor Moon Blue
-        case "Saitama":
-          return "#FFC107" // Saitama Yellow
-        case "Shinji":
-          return "#9C27B0" // Shinji Purple
-        case "Goku":
-          return "#FF5722" // Goku Orange/Red
-        case "Edward Elric":
-          return "#FFD700" // Edward Gold
-        case "Tanjiro":
-          return "#00BCD4" // Tanjiro Teal
-        case "Itachi Uchiha":
-          return "#DC143C" // Itachi Crimson
-        case "Natsu Dragneel":
-          return "#FF1493" // Natsu Deep Pink (изменил на более яркий)
-        case "Monkey D. Luffy":
-          return "#FF4444" // Luffy Red
-        case "Yujiro Hanma":
-          return "#8B4513" // Hanma Brown
-        case "Griffith":
-          return "#F0F8FF" // Griffith Alice Blue (изменил на более светлый)
-        case "Alucard":
-          return "#8B0000" // Alucard Dark Red
-        default:
-          return "#3F51B5" // Default Indigo
-      }
-    }
-
-    // Получаем цвет для текста в зависимости от фона
-    const getTextColor = (bgColor: string): string => {
-      // Для светлых фонов используем темный текст
-      if (bgColor === "#F0F8FF" || bgColor === "#FFD700" || bgColor === "#FFC107") {
-        return "#1a1a2e"
-      }
-      return "white"
-    }
-
-    const bgColor = getBackgroundColor(characterData.name)
-    const textColor = getTextColor(bgColor)
+    // Define background colors for each character
+    const bgColor =
+      characterData.name === "Naruto"
+        ? "#FF9B21" // Naruto Orange
+        : characterData.name === "Eren Yeager"
+          ? "#4CAF50" // Eren Green
+          : characterData.name === "Asuna"
+            ? "#E91E63" // Asuna Pink/Red
+            : characterData.name === "Sailor Moon"
+              ? "#2196F3" // Sailor Moon Blue
+              : characterData.name === "Saitama"
+                ? "#FFC107" // Saitama Yellow
+                : characterData.name === "Shinji"
+                  ? "#9C27B0" // Shinji Purple
+                  : "#3F51B5" // Default Indigo
 
     return new ImageResponse(
       <div
@@ -87,52 +54,38 @@ export async function GET(req: NextRequest) {
           padding: "40px",
           border: "8px solid #1a1a2e",
           borderRadius: "20px",
-          fontFamily: "system-ui, -apple-system, sans-serif",
         }}
       >
         <img
           src={characterImageUrl || "/placeholder.svg"}
-          width={280}
-          height={280}
-          style={{
-            borderRadius: "50%",
-            border: "6px solid #1a1a2e",
-            marginBottom: "30px",
-            objectFit: "cover",
-          }}
+          width={300}
+          height={300}
+          style={{ borderRadius: "50%", border: "6px solid #1a1a2e", marginBottom: "30px" }}
           alt={characterName}
         />
         <h1
           style={{
-            fontSize: "72px",
-            fontWeight: "900",
-            color: textColor,
-            textShadow:
-              textColor === "white"
-                ? "4px 4px 0 #1a1a2e, -2px -2px 0 #1a1a2e, 2px -2px 0 #1a1a2e, -2px 2px 0 #1a1a2e"
-                : "2px 2px 0 rgba(255,255,255,0.8), -1px -1px 0 rgba(255,255,255,0.8)",
+            fontSize: "82px",
+            fontWeight: "bold",
+            color: "white",
+            textShadow: "3px 3px 0 #1a1a2e, -3px -3px 0 #1a1a2e, 3px -3px 0 #1a1a2e, -3px 3px 0 #1a1a2e",
             margin: "0 0 20px 0",
             textAlign: "center",
             lineHeight: 1.1,
-            maxWidth: "90%",
           }}
         >
           You are {characterName}! {characterData.emoji}
         </h1>
         <p
           style={{
-            fontSize: "28px",
-            color: textColor === "white" ? "#1a1a2e" : "#2d2d2d",
+            fontSize: "32px",
+            color: "#1a1a2e",
             textAlign: "center",
-            maxWidth: "85%",
-            lineHeight: 1.4,
-            fontWeight: "600",
-            textShadow: textColor === "white" ? "none" : "1px 1px 0 rgba(255,255,255,0.7)",
+            maxWidth: "90%",
+            lineHeight: 1.3,
           }}
         >
-          {characterData.description.length > 180
-            ? characterData.description.substring(0, 180) + "..."
-            : characterData.description}
+          {characterData.description}
         </p>
       </div>,
       {
