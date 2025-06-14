@@ -17,7 +17,7 @@ export function ShareResultButton({ character, onReset }: ShareResultButtonProps
   // Update to use the correct domain
   const appBaseUrl = process.env.NEXT_PUBLIC_URL || "https://manga-anime-miniapp.vercel.app"
 
-  // Fun messages for each character
+  // Fun messages for each character - ОБНОВЛЕНО для всех персонажей включая новых
   const characterMessages: Record<string, string[]> = {
     Naruto: [
       "Believe it! I'm Naruto! 🍥 Which Anime Character are you?",
@@ -58,6 +58,41 @@ export function ShareResultButton({ character, onReset }: ShareResultButtonProps
       "Equivalent exchange! I'm Edward Elric! ⚗️ Which Anime Character are you?",
       "Alchemy is science! I'm Edward Elric! ⚗️ Discover your anime alter ego!",
       "Don't call me short! I'm Edward Elric! ⚗️ Find out which anime character you are!",
+    ],
+    Tanjiro: [
+      "I'll protect everyone! I'm Tanjiro! 🌊 Which Anime Character are you?",
+      "Water Breathing! I'm Tanjiro! 🌊 Discover your anime alter ego!",
+      "I can smell kindness! I'm Tanjiro! 🌊 Find out which anime character you are!",
+    ],
+    "Itachi Uchiha": [
+      "I bear this burden! I'm Itachi Uchiha! 🔥 Which Anime Character are you?",
+      "For the village! I'm Itachi Uchiha! 🔥 Discover your anime alter ego!",
+      "Forgive me, Sasuke! I'm Itachi Uchiha! 🔥 Find out which anime character you are!",
+    ],
+    "Natsu Dragneel": [
+      "I'm all fired up! I'm Natsu Dragneel! 🔥 Which Anime Character are you?",
+      "Fire Dragon's Roar! I'm Natsu Dragneel! 🔥 Discover your anime alter ego!",
+      "Fairy Tail never gives up! I'm Natsu Dragneel! 🔥 Find out which anime character you are!",
+    ],
+    "Monkey D. Luffy": [
+      "I'm gonna be Pirate King! I'm Luffy! 🏴‍☠️ Which Anime Character are you?",
+      "Gomu Gomu no! I'm Luffy! 🏴‍☠️ Discover your anime alter ego!",
+      "Adventure awaits! I'm Luffy! 🏴‍☠️ Find out which anime character you are!",
+    ],
+    "Yujiro Hanma": [
+      "I am the strongest! I'm Yujiro Hanma! 💪 Which Anime Character are you?",
+      "Fear the Ogre! I'm Yujiro Hanma! 💪 Discover your anime alter ego!",
+      "Strength is everything! I'm Yujiro Hanma! 💪 Find out which anime character you are!",
+    ],
+    Griffith: [
+      "My dream will come true! I'm Griffith! 👑 Which Anime Character are you?",
+      "I will have my kingdom! I'm Griffith! 👑 Discover your anime alter ego!",
+      "Destiny calls! I'm Griffith! 👑 Find out which anime character you are!",
+    ],
+    Alucard: [
+      "I am the night! I'm Alucard! 🧛 Which Anime Character are you?",
+      "Blood and shadows! I'm Alucard! 🧛 Discover your anime alter ego!",
+      "Immortal power! I'm Alucard! 🧛 Find out which anime character you are!",
     ],
   }
 
@@ -100,6 +135,13 @@ export function ShareResultButton({ character, onReset }: ShareResultButtonProps
     Shinji: "mojo", // Purple-ish
     Goku: "primary", // Orange-ish
     "Edward Elric": "buttercup", // Gold-ish
+    Tanjiro: "bubbles", // Teal-ish
+    "Itachi Uchiha": "blossom", // Crimson-ish
+    "Natsu Dragneel": "blossom", // Pink-ish
+    "Monkey D. Luffy": "blossom", // Red-ish
+    "Yujiro Hanma": "buttercup", // Brown-ish
+    Griffith: "primary", // White-ish
+    Alucard: "blossom", // Crimson-ish
   }
   const buttonVariant = characterColors[character.name] || "primary"
 
