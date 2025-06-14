@@ -25,39 +25,45 @@ export async function GET(req: NextRequest) {
       return new Response("Character not found", { status: 404 })
     }
 
-    // Define background colors for each character
-    const bgColor =
-      characterData.name === "Naruto"
-        ? "#FF9B21" // Naruto Orange
-        : characterData.name === "Eren Yeager"
-          ? "#4CAF50" // Eren Green
-          : characterData.name === "Asuna"
-            ? "#E91E63" // Asuna Pink/Red
-            : characterData.name === "Sailor Moon"
-              ? "#2196F3" // Sailor Moon Blue
-              : characterData.name === "Saitama"
-                ? "#FFC107" // Saitama Yellow
-                : characterData.name === "Shinji"
-                  ? "#9C27B0" // Shinji Purple
-                  : characterData.name === "Goku"
-                    ? "#FF5722" // Goku Orange/Red
-                    : characterData.name === "Edward Elric"
-                      ? "#FFD700" // Edward Gold
-                      : characterData.name === "Tanjiro"
-                        ? "#00BCD4" // Tanjiro Teal
-                        : characterData.name === "Itachi Uchiha"
-                          ? "#DC143C" // Itachi Crimson
-                          : characterData.name === "Natsu Dragneel"
-                            ? "#FF69B4" // Natsu Pink
-                            : characterData.name === "Monkey D. Luffy"
-                              ? "#FF4444" // Luffy Red
-                              : characterData.name === "Yujiro Hanma"
-                                ? "#8B4513" // Hanma Brown
-                                : characterData.name === "Griffith"
-                                  ? "#F5F5DC" // Griffith Beige/White
-                                  : characterData.name === "Alucard"
-                                    ? "#8B0000" // Alucard Dark Red
-                                    : "#3F51B5" // Default Indigo
+    // Define background colors for each character - ИСПРАВЛЕНО для всех персонажей
+    const getBackgroundColor = (name: string): string => {
+      switch (name) {
+        case "Naruto":
+          return "#FF9B21" // Naruto Orange
+        case "Eren Yeager":
+          return "#4CAF50" // Eren Green
+        case "Asuna":
+          return "#E91E63" // Asuna Pink/Red
+        case "Sailor Moon":
+          return "#2196F3" // Sailor Moon Blue
+        case "Saitama":
+          return "#FFC107" // Saitama Yellow
+        case "Shinji":
+          return "#9C27B0" // Shinji Purple
+        case "Goku":
+          return "#FF5722" // Goku Orange/Red
+        case "Edward Elric":
+          return "#FFD700" // Edward Gold
+        case "Tanjiro":
+          return "#00BCD4" // Tanjiro Teal
+        case "Itachi Uchiha":
+          return "#DC143C" // Itachi Crimson
+        case "Natsu Dragneel":
+          return "#FF69B4" // Natsu Pink
+        case "Monkey D. Luffy":
+          return "#FF4444" // Luffy Red
+        case "Yujiro Hanma":
+          return "#8B4513" // Hanma Brown
+        case "Griffith":
+          return "#F5F5DC" // Griffith Beige/White
+        case "Alucard":
+          return "#8B0000" // Alucard Dark Red
+        default:
+          return "#3F51B5" // Default Indigo
+      }
+    }
+
+    const bgColor = getBackgroundColor(characterData.name)
 
     return new ImageResponse(
       <div

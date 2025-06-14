@@ -113,7 +113,7 @@ This project demonstrates the power of retroactive funding by:
 
 Обновим манифест Farcaster с информацией об OP Retro:
 
-```typescriptreact file="app/.well-known/farcaster.json/route.ts"
+\`\`\`typescriptreact file="app/.well-known/farcaster.json/route.ts"
 [v0-no-op-code-block-prefix]export async function GET() {
   const URL = process.env.NEXT_PUBLIC_URL || "https://manga-anime-miniapp.vercel.app"
 
