@@ -7,8 +7,33 @@ type Props = {
 }
 
 export async function generateMetadata({ params }: Props, parent: ResolvingMetadata): Promise<Metadata> {
-  const characterNameParam = decodeURIComponent(params.characterName)
-  const character = Object.values(characters).find((c) => c.name.toLowerCase() === characterNameParam.toLowerCase())
+  // УЛУЧШЕННОЕ декодирование URL
+  let characterNameParam: string
+  try {
+    characterNameParam = decodeURIComponent(params.characterName)
+  } catch (error) {
+    console.error(`Share Page: Failed to decode character name: "${params.characterName}"`, error)
+    characterNameParam = params.characterName.replace(/%20/g, " ").replace(/%2E/g, ".")
+  }
+
+  console.log(`Share Page: Original param: "${params.characterName}"`)
+  console.log(`Share Page: Decoded character name: "${characterNameParam}"`)
+
+  // УЛУЧШЕННЫЙ поиск персонажа
+  const character = Object.values(characters).find((c) => {
+    const match = c.name.toLowerCase() === characterNameParam.toLowerCase()
+    console.log(`Share Page: Comparing "${c.name.toLowerCase()}" with "${characterNameParam.toLowerCase()}" = ${match}`)
+    return match
+  })
+
+  console.log(`Share Page: Found character:`, character ? `${character.name} ${character.emoji}` : "NOT FOUND")
+
+  if (!character) {
+    console.log(
+      `Share Page: Available characters:`,
+      Object.values(characters).map((c) => `"${c.name}"`),
+    )
+  }
 
   const appBaseUrl = process.env.NEXT_PUBLIC_URL || "https://manga-anime-miniapp.vercel.app"
   const appName = process.env.NEXT_PUBLIC_ONCHAINKIT_PROJECT_NAME || "Anime Character Analyzer"
@@ -31,6 +56,7 @@ export async function generateMetadata({ params }: Props, parent: ResolvingMetad
   let frameDefinition: any
 
   if (!character) {
+    console.log(`Share Page: Returning default frame definition due to character not found`)
     frameDefinition = {
       version: "next", // As per your example
       imageUrl: defaultFcFrameImage,
@@ -79,10 +105,13 @@ export async function generateMetadata({ params }: Props, parent: ResolvingMetad
     Alucard: "/alucard.png",
   }
   const characterImagePublicPath = characterImageMap[character.name] || "/placeholder.svg"
+  console.log(`Share Page: Character image path for "${character.name}": ${characterImagePublicPath}`)
 
   const dynamicImageUrl = new URL("/api/generate-og-image", appBaseUrl)
-  dynamicImageUrl.searchParams.set("characterName", character.name)
+  dynamicImageUrl.searchParams.set("characterName", character.name) // Используем точное имя из базы
   dynamicImageUrl.searchParams.set("characterImage", characterImagePublicPath)
+
+  console.log(`Share Page: Dynamic image URL: ${dynamicImageUrl.toString()}`)
 
   frameDefinition = {
     version: "next", // As per your example
@@ -98,6 +127,8 @@ export async function generateMetadata({ params }: Props, parent: ResolvingMetad
       },
     },
   }
+
+  console.log(`Share Page: Generated frame definition for ${character.name}`)
 
   return {
     title: `I'm ${character.name}! - Anime Character Analyzer Result`,
@@ -117,7 +148,15 @@ export async function generateMetadata({ params }: Props, parent: ResolvingMetad
 
 // Fallback page content (remains the same)
 export default function SharePage({ params }: Props) {
-  const characterNameParam = decodeURIComponent(params.characterName)
+  // УЛУЧШЕННОЕ декодирование URL
+  let characterNameParam: string
+  try {
+    characterNameParam = decodeURIComponent(params.characterName)
+  } catch (error) {
+    console.error(`Share Page Render: Failed to decode character name: "${params.characterName}"`, error)
+    characterNameParam = params.characterName.replace(/%20/g, " ").replace(/%2E/g, ".")
+  }
+
   const character = Object.values(characters).find((c) => c.name.toLowerCase() === characterNameParam.toLowerCase())
   const appBaseUrl = process.env.NEXT_PUBLIC_URL || "https://manga-anime-miniapp.vercel.app"
 
@@ -125,7 +164,9 @@ export default function SharePage({ params }: Props) {
     return (
       <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-br from-indigo-900 via-purple-900 to-indigo-800 p-8 text-center">
         <h1 className="text-4xl font-heading text-white mb-6">Oops! Character Not Found</h1>
-        <p className="font-body text-xl text-gray-200 mb-8">We couldn't find that anime character result.</p>
+        <p className="font-body text-xl text-gray-200 mb-8">
+          We couldn't find that anime character result for "{characterNameParam}".
+        </p>
         <a href={appBaseUrl}>
           <PpgButton variant="primary" className="text-xl">
             Take the Quiz!

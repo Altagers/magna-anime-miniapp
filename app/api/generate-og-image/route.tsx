@@ -10,22 +10,41 @@ export async function GET(req: NextRequest) {
     const characterName = searchParams.get("characterName")
     const characterImagePublicPath = searchParams.get("characterImage") // e.g., /naruto.png
 
+    console.log(`OG Image: Received request for character: "${characterName}"`)
+    console.log(`OG Image: Character image path: "${characterImagePublicPath}"`)
+
     // Update the base URL
     const baseUrl = process.env.NEXT_PUBLIC_URL || "https://manga-anime-miniapp.vercel.app"
 
     if (!characterName || !characterImagePublicPath) {
+      console.error(
+        `OG Image: Missing parameters - characterName: ${characterName}, characterImage: ${characterImagePublicPath}`,
+      )
       return new Response("Missing character information", { status: 400 })
     }
 
     // Construct absolute URL for the character image
     const characterImageUrl = new URL(characterImagePublicPath, baseUrl).toString()
+    console.log(`OG Image: Full character image URL: ${characterImageUrl}`)
 
-    const characterData = Object.values(characters).find((c) => c.name === characterName)
+    // ИСПРАВЛЕНО: используем toLowerCase() для поиска, как в share page
+    const characterData = Object.values(characters).find((c) => c.name.toLowerCase() === characterName.toLowerCase())
+    console.log(
+      `OG Image: Found character data:`,
+      characterData ? `${characterData.name} ${characterData.emoji}` : "NOT FOUND",
+    )
+
     if (!characterData) {
+      console.error(`OG Image: Character not found for name: "${characterName}"`)
+      console.log(
+        `OG Image: Available characters:`,
+        Object.values(characters).map((c) => c.name),
+      )
+      console.log(`OG Image: Search was case-insensitive for: "${characterName.toLowerCase()}"`)
       return new Response("Character not found", { status: 404 })
     }
 
-    // Define background colors for each character
+    // Define background colors for each character - ОБНОВЛЕНО для всех персонажей
     const bgColor =
       characterData.name === "Naruto"
         ? "#FF9B21" // Naruto Orange
@@ -39,7 +58,27 @@ export async function GET(req: NextRequest) {
                 ? "#FFC107" // Saitama Yellow
                 : characterData.name === "Shinji"
                   ? "#9C27B0" // Shinji Purple
-                  : "#3F51B5" // Default Indigo
+                  : characterData.name === "Goku"
+                    ? "#FF5722" // Goku Orange
+                    : characterData.name === "Edward Elric"
+                      ? "#FF9800" // Edward Gold
+                      : characterData.name === "Tanjiro"
+                        ? "#00BCD4" // Tanjiro Teal
+                        : characterData.name === "Itachi Uchiha"
+                          ? "#F44336" // Itachi Crimson
+                          : characterData.name === "Natsu Dragneel"
+                            ? "#E91E63" // Natsu Pink
+                            : characterData.name === "Monkey D. Luffy"
+                              ? "#F44336" // Luffy Red
+                              : characterData.name === "Yujiro Hanma"
+                                ? "#795548" // Hanma Brown
+                                : characterData.name === "Griffith"
+                                  ? "#9E9E9E" // Griffith White/Gray
+                                  : characterData.name === "Alucard"
+                                    ? "#B71C1C" // Alucard Dark Red
+                                    : "#3F51B5" // Default Indigo
+
+    console.log(`OG Image: Using background color: ${bgColor} for ${characterData.name}`)
 
     return new ImageResponse(
       <div
@@ -74,7 +113,7 @@ export async function GET(req: NextRequest) {
             lineHeight: 1.1,
           }}
         >
-          You are {characterName}! {characterData.emoji}
+          You are {characterData.name}! {characterData.emoji}
         </h1>
         <p
           style={{
@@ -94,7 +133,8 @@ export async function GET(req: NextRequest) {
       },
     )
   } catch (e: any) {
-    console.error(`OG Image Error: Failed to generate ImageResponse:`, e.message)
+    console.error(`OG Image Error: Failed to generate ImageResponse for "${req.url}":`, e.message)
+    console.error(`OG Image Error Stack:`, e.stack)
     return new Response(`Failed to generate image: ${e.message}`, { status: 500 })
   }
 }
