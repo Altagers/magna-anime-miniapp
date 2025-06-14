@@ -32,6 +32,23 @@ A fun Farcaster Mini App that analyzes your posts to determine which anime chara
 - **Deployment**: Vercel
 - **Language**: TypeScript
 
+## 🏆 OP Retro Funding
+
+This project is part of Optimism's Retroactive Public Goods Funding program:
+
+- **Project ID**: `0x60bd8803fd4feb1bad1339489ffacc2d3bc54409c30ea398d0e2af56bc78fb84`
+- **Category**: Social & Entertainment
+- **Impact**: Bringing anime culture to Farcaster and onboarding new users to crypto through fun, engaging experiences
+
+### Why This Project Matters
+
+- **Cultural Bridge**: Connects anime enthusiasts with Web3 technology
+- **User Onboarding**: Introduces new users to Farcaster and crypto in a fun way
+- **Open Source**: Fully open source for community learning and contribution
+- **Innovation**: Demonstrates creative use of MiniKit and Farcaster frames
+
+Support public goods development by using and sharing the app! 🎌
+
 ## 🎮 How It Works
 
 1. **Connect**: Users connect their Farcaster account via MiniKit
@@ -151,6 +168,3 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 ---
 
 **Made with ❤️ for the anime and Farcaster communities**
-\`\`\`
-
-Также создам файл с рекомендациями для контрибьюторов:
