@@ -49,7 +49,7 @@ export async function POST(request: NextRequest) {
     // Simple keyword-based analysis without OpenAI
     const allPostsText = castTexts.join(" ").toLowerCase()
 
-    // Define keywords for each character with weights
+    // Define keywords for each character with weights - ОБНОВЛЕНО с правильными ключами
     const characterKeywords = {
       naruto: [
         { word: "believe", weight: 1.5 },
