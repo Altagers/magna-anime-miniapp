@@ -5,6 +5,7 @@ import { useMiniKit } from "@coinbase/onchainkit/minikit"
 import { SentimentAnalyzer } from "@/components/sentiment-analyzer"
 import { Sparkles, Heart, Star } from "lucide-react"
 import { AnimeQuote } from "@/components/anime-quote"
+import { OpRetroBadge } from "@/components/op-retro-badge"
 
 // Background decoration component
 const BgElement = ({
@@ -135,6 +136,9 @@ export default function Home() {
             </a>{" "}
             support. Powered by Minikit
           </p>
+
+          {/* OP Retro Badge */}
+          <OpRetroBadge />
 
           {/* Рандомная аниме-цитата */}
           <AnimeQuote />
