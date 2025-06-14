@@ -7,6 +7,7 @@ export async function GET() {
   const testResults = []
 
   for (const [key, character] of Object.entries(characters)) {
+    // Маппинг персонажей с правильными именами файлов (УБРАНЫ НАТСУ И ЛУФФИ)
     const characterImageMap: Record<string, string> = {
       Naruto: "/naruto.png",
       "Eren Yeager": "/eren.png",
@@ -18,8 +19,6 @@ export async function GET() {
       "Edward Elric": "/edward.png",
       Tanjiro: "/tanjiro.png",
       "Itachi Uchiha": "/itachi.png",
-      "Natsu Dragneel": "/natsu.png",
-      "Monkey D. Luffy": "/luffy.png",
       "Yujiro Hanma": "/hanma.png",
       Griffith: "/grifith.png",
       Alucard: "/alucard.png",
@@ -45,6 +44,8 @@ export async function GET() {
       baseUrl,
       totalCharacters: testResults.length,
       characters: testResults,
+      removedCharacters: ["Natsu Dragneel", "Monkey D. Luffy"],
+      message: "Natsu and Luffy have been removed from the game",
     },
     { status: 200 },
   )

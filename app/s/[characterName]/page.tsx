@@ -86,7 +86,7 @@ export async function generateMetadata({ params }: Props, parent: ResolvingMetad
     }
   }
 
-  // ПОЛНЫЙ маппинг всех персонажей с правильными именами файлов
+  // Маппинг персонажей с правильными именами файлов (УБРАНЫ НАТСУ И ЛУФФИ)
   const characterImageMap: Record<string, string> = {
     Naruto: "/naruto.png",
     "Eren Yeager": "/eren.png",
@@ -98,8 +98,6 @@ export async function generateMetadata({ params }: Props, parent: ResolvingMetad
     "Edward Elric": "/edward.png",
     Tanjiro: "/tanjiro.png",
     "Itachi Uchiha": "/itachi.png",
-    "Natsu Dragneel": "/natsu.png",
-    "Monkey D. Luffy": "/luffy.png",
     "Yujiro Hanma": "/hanma.png",
     Griffith: "/grifith.png", // Используем существующее имя файла
     Alucard: "/alucard.png",
@@ -176,7 +174,7 @@ export default function SharePage({ params }: Props) {
     )
   }
 
-  // ПОЛНЫЙ маппинг всех персонажей с правильными именами файлов
+  // Маппинг персонажей с правильными именами файлов (УБРАНЫ НАТСУ И ЛУФФИ)
   const characterImageMap: Record<string, string> = {
     Naruto: "/naruto.png",
     "Eren Yeager": "/eren.png",
@@ -188,8 +186,6 @@ export default function SharePage({ params }: Props) {
     "Edward Elric": "/edward.png",
     Tanjiro: "/tanjiro.png",
     "Itachi Uchiha": "/itachi.png",
-    "Natsu Dragneel": "/natsu.png",
-    "Monkey D. Luffy": "/luffy.png",
     "Yujiro Hanma": "/hanma.png",
     Griffith: "/grifith.png", // Используем существующее имя файла
     Alucard: "/alucard.png",

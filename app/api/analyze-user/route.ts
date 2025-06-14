@@ -49,7 +49,7 @@ export async function POST(request: NextRequest) {
     // Simple keyword-based analysis without OpenAI
     const allPostsText = castTexts.join(" ").toLowerCase()
 
-    // Define keywords for each character with weights - ИСПРАВЛЕНЫ КЛЮЧИ
+    // Define keywords for each character with weights - УБРАНЫ НАТСУ И ЛУФФИ
     const characterKeywords = {
       naruto: [
         { word: "believe", weight: 1.5 },
@@ -212,38 +212,6 @@ export async function POST(request: NextRequest) {
         { word: "peace", weight: 1.5 },
         { word: "forgiveness", weight: 1.5 },
         { word: "uchiha", weight: 2 },
-      ],
-      natsu: [
-        { word: "fire", weight: 2.5 },
-        { word: "dragon", weight: 2.5 },
-        { word: "guild", weight: 2 },
-        { word: "fairy tail", weight: 3 },
-        { word: "friends", weight: 2 },
-        { word: "lucy", weight: 2 },
-        { word: "happy", weight: 2 },
-        { word: "igneel", weight: 2.5 },
-        { word: "motion sickness", weight: 2 },
-        { word: "hot", weight: 1.5 },
-        { word: "passionate", weight: 1.5 },
-        { word: "protect", weight: 1.5 },
-        { word: "magic", weight: 1.5 },
-        { word: "dragneel", weight: 2.5 },
-      ],
-      luffy: [
-        { word: "pirate", weight: 2.5 },
-        { word: "king", weight: 2 },
-        { word: "adventure", weight: 2 },
-        { word: "crew", weight: 2 },
-        { word: "meat", weight: 2 },
-        { word: "rubber", weight: 2.5 },
-        { word: "straw hat", weight: 3 },
-        { word: "one piece", weight: 3 },
-        { word: "freedom", weight: 2 },
-        { word: "nakama", weight: 2.5 },
-        { word: "gomu gomu", weight: 3 },
-        { word: "treasure", weight: 1.5 },
-        { word: "sea", weight: 1.5 },
-        { word: "fun", weight: 1.5 },
       ],
       hanma: [
         { word: "strongest", weight: 2.5 },

@@ -99,24 +99,6 @@ export const characters: Record<string, AnimeCharacter> = {
       "You're wise beyond your years and make difficult sacrifices for the greater good. Your posts reveal deep thinking.",
     joke: "You've made decisions that seemed villainous but were actually heroic. Nobody understood you.",
   },
-  natsu: {
-    name: "Natsu Dragneel",
-    emoji: "🔥",
-    color: "pink",
-    trait: "Fiery & Loyal",
-    description:
-      "You're hot-headed and fiercely protective of friends! Your posts show passionate nature and unwavering loyalty.",
-    joke: "You've definitely gotten into fights over small things and somehow made lifelong friends.",
-  },
-  luffy: {
-    name: "Monkey D. Luffy",
-    emoji: "🏴‍☠️",
-    color: "red",
-    trait: "Free-spirited & Adventurous",
-    description:
-      "You're incredibly optimistic and love freedom! Your posts show infectious enthusiasm and unshakeable belief in dreams.",
-    joke: "You've made important life decisions based on whether something sounds fun or not.",
-  },
   hanma: {
     name: "Yujiro Hanma",
     emoji: "💪",

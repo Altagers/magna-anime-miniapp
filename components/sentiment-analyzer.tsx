@@ -114,14 +114,12 @@ function ResultScreen({ result, onReset }: { result: AnalysisResult; onReset: ()
     "Edward Elric": "buttercup", // Gold/Yellow
     Tanjiro: "bubbles", // Teal/Blue
     "Itachi Uchiha": "blossom", // Crimson/Red
-    "Natsu Dragneel": "blossom", // Pink/Red
-    "Monkey D. Luffy": "blossom", // Red
     "Yujiro Hanma": "buttercup", // Brown/Green
     Griffith: "primary", // White/Gold
     Alucard: "blossom", // Crimson/Red
   }
 
-  // ПОЛНЫЙ маппинг всех персонажей с правильными именами файлов
+  // Маппинг персонажей с правильными именами файлов (УБРАНЫ НАТСУ И ЛУФФИ)
   const characterImageMap: Record<string, string> = {
     Naruto: "/naruto.png",
     "Eren Yeager": "/eren.png",
@@ -133,8 +131,6 @@ function ResultScreen({ result, onReset }: { result: AnalysisResult; onReset: ()
     "Edward Elric": "/edward.png",
     Tanjiro: "/tanjiro.png",
     "Itachi Uchiha": "/itachi.png",
-    "Natsu Dragneel": "/natsu.png",
-    "Monkey D. Luffy": "/luffy.png",
     "Yujiro Hanma": "/hanma.png",
     Griffith: "/grifith.png", // Используем существующее имя файла
     Alucard: "/alucard.png",

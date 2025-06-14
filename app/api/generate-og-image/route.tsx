@@ -66,7 +66,7 @@ export async function GET(req: NextRequest) {
       console.error(`❌ OG Image: Failed to test image URL:`, imageError)
     }
 
-    // Define background colors for each character
+    // Define background colors for each character (УБРАНЫ НАТСУ И ЛУФФИ)
     const bgColorMap: Record<string, string> = {
       Naruto: "#FF9B21",
       "Eren Yeager": "#4CAF50",
@@ -78,8 +78,6 @@ export async function GET(req: NextRequest) {
       "Edward Elric": "#FF9800",
       Tanjiro: "#00BCD4",
       "Itachi Uchiha": "#F44336",
-      "Natsu Dragneel": "#E91E63",
-      "Monkey D. Luffy": "#F44336",
       "Yujiro Hanma": "#795548",
       Griffith: "#9E9E9E",
       Alucard: "#B71C1C",
